@@ -96,6 +96,7 @@ public class MemoryPostRepository implements PostRepository {
                 matchedPost.add(postMemoryDB.get(i));
             }
         }
+        return matchedPost;
 
         /*for (Post post : postMemoryDB) {
             if (post.getTitle().indexOf(keyword) != -1 ||
@@ -104,7 +105,6 @@ public class MemoryPostRepository implements PostRepository {
                 matchedPost.add(post);
             }
         }*/
-        return matchedPost;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     @Override
-    public Post searchSpecificPost(int postNumber) {//특정 게시글 검색
+    public Post searchSpecificPost(int postNumber) {// 게시글 번호로 특정 게시글 검색
         //양식 msg
         for (int i = 0; i < postMemoryDB.size(); i++) {
             if (postNumber == postMemoryDB.get(i).getPostNumber()) {
@@ -134,5 +134,6 @@ public class MemoryPostRepository implements PostRepository {
     public void removePost(int postNumber) {//특정 게시글 삭제
         //양식 msg
         //삭제하려는 글이 맞는지 확인 후 삭제(관리자)
+
     }
 }
