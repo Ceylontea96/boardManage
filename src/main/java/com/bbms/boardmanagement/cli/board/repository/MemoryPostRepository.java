@@ -3,6 +3,7 @@ package com.bbms.boardmanagement.cli.board.repository;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.SystemMessage;
+import com.bbms.boardmanagement.cli.board.domain.controller.changePost.ChangePost;
 import javafx.geometry.Pos;
 
 import java.time.format.DateTimeFormatter;
@@ -87,9 +88,11 @@ public class MemoryPostRepository implements PostRepository {
         return postList;
     }
 
-    @Override
-    public void changePost(Post post) {
-
+    @Override // 글 수정
+    public void changePost(int postNumber,String title ,String mainText) {
+        Post post = searchSpecificPost(postNumber);
+        post.setTitle(title);
+        post.setMainText(mainText);
     }
 
     @Override
