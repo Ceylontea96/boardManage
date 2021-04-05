@@ -26,13 +26,17 @@ public class MemoryPostRepository implements PostRepository {
         Post post3 = new Post("제목3", "글쓴이3", "아무내용없음3");
         Post post4 = new Post("제목4", "글쓴이4", "아무내용없음4");
 
-
+        postMemoryDB.put(post1.getPostNumber(), post1);
+        postMemoryDB.put(post2.getPostNumber(), post2);
+        postMemoryDB.put(post3.getPostNumber(), post3);
+        postMemoryDB.put(post4.getPostNumber(), post4);
 
 
     }
 
     @Override
     public void posting(Post post) {        //게시글 추가
+
     }
 
     @Override
