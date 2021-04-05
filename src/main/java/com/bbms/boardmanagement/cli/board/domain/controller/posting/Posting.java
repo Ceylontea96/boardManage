@@ -1,4 +1,4 @@
-package com.bbms.boardmanagement.cli.board.domain.controller;
+package com.bbms.boardmanagement.cli.board.domain.controller.posting;
 
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
@@ -8,9 +8,9 @@ import javafx.geometry.Pos;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
-public class PostController {
+public class Posting {
     private final PostRepository postRepository;
-    public PostController() {
+    public Posting() {
         postRepository = new MemoryPostRepository();
     }
     //게시글 추가 기능

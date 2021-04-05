@@ -45,7 +45,7 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     @Override
-    public void changePost(int postNumber, String title, String mainText) {
+    public void changePost(Post post) {
 
     }
 
