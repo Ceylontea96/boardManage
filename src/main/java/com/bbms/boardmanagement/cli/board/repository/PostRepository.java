@@ -12,7 +12,6 @@ public interface PostRepository {
     void posting(Post post);
 
     //조건별 게시글 검색
-
     List<Post> searchPostList(String keyword, SearchCondition condition);
 
     //특정 게시글 수정
