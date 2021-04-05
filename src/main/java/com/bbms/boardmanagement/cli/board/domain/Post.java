@@ -47,12 +47,13 @@ public class Post {
 
     public String toString() {
 
-        return String.format
+        /*return String.format
                 ("제목: %s\n글쓴이: %s\n작성시간: %s\n%s\n추천수: %d\n",
                         title, author,
                         reportingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-                        mainText, recommend);
-    } //추후에 댓글 추가
+                        mainText, recommend);*/
+        return String.format("%d    %s              %s      %s      %d      %d\n", postNumber, title, author, reportingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), view, recommend);
+    }
 
     //getter 및 setter
 
