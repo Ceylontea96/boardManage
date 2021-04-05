@@ -135,4 +135,12 @@ public class Post {
     public static void setPostCount(int postCount) {
         Post.postCount = postCount;
     }
+
+    public static int getSequence() {
+        return sequence;
+    }
+
+    public static void setSequence(int sequence) {
+        Post.sequence = sequence;
+    }
 }
