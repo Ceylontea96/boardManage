@@ -34,14 +34,19 @@ class MemoryPostRepositoryTest {
     }
 
     @Test
-    @DisplayName("모든 게시글 조회")
-    void showAll() {
+    @DisplayName("삭제")
+    void remove() {
 
     }
 
     @Test
-    @DisplayName("간단 테스트")
+    @DisplayName("조건별 검색")
     void normalTest() {
-
+        repository.removePost(3);
+        List<Post> postList = repository.searchPostList("제목", SearchCondition.ALL);
+        for (Post post : postList) {
+            System.out.println(post);
+            repository.readMore(post);
+        }
     }
 }
