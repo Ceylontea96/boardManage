@@ -38,7 +38,7 @@ public class MemoryPostRepository implements PostRepository {
 
     @Override
     public void posting(Post post) {        //게시글 추가
-
+        postMemoryDB.put(post.getPostNumber(), post);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     @Override
-    public void changePost(int postNumber, String title, String mainText) {
+    public void changePost(Post post) {
 
     }
 
