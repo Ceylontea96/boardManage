@@ -20,6 +20,9 @@ public class Post {
     private String comment;                                 //게시글 댓글 배열로 담기
     private static int postCount;                           //전체 게시글 수
     private int commentCount;                               //댓글 수
+
+
+
     private String authorCode;                              //작성자 코드
 
 
@@ -149,5 +152,19 @@ public class Post {
 
     public static void setSequence(int sequence) {
         Post.sequence = sequence;
+    }
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+    public String getAuthorCode() {
+        return authorCode;
+    }
+
+    public void setAuthorCode(String authorCode) {
+        this.authorCode = authorCode;
     }
 }
