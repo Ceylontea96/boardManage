@@ -17,15 +17,16 @@ public class Post {
     private int view;                                       //게시글 조회수
     private int recommend;                                  //게시글 추천수
     private String comment;                                 //게시글 댓글 배열로 담기
+    private static int postCount;                           //전체 게시글 수
 
-    private static int postCount;                           //게시글 수 (전체 글 배열의 사이즈로 파악)
+    private static int sequence;                           //게시글 번호 정하는 상수
 
 
     //생성자
 
 
     public Post(String title, String author, String mainText) {
-        this.postNumber = ++postCount;
+        this.postNumber = ++sequence;
         this.title = title;
         this.author = author;
         this.userRank = "일반회원";
