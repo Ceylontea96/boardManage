@@ -24,10 +24,10 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     private static void insertTestData() {
-        Post post1 = new Post("제목1", "글쓴이1", "아무내용없음1");
-        Post post2 = new Post("제목2", "글쓴이2", "아무내용없음2");
-        Post post3 = new Post("제목3", "글쓴이3", "아무내용없음3");
-        Post post4 = new Post("제목4", "글쓴이4", "제목이랑아무내용없음4");
+        Post post1 = new Post("제목1", "글쓴이1", "아무내용없음1", "");
+        Post post2 = new Post("제목2", "글쓴이2", "아무내용없음2", "");
+        Post post3 = new Post("제목3", "글쓴이3", "아무내용없음3", "");
+        Post post4 = new Post("제목4", "글쓴이4", "제목이랑아무내용없음4", "");
 
         postMemoryDB.put(post1.getPostNumber(), post1);
         postMemoryDB.put(post2.getPostNumber(), post2);
@@ -94,7 +94,7 @@ public class MemoryPostRepository implements PostRepository {
         post.setMainText(mainText);
     }
 
-    @Override
+    @Override // 게시글 번호로 게시글 검색
     public Post searchSpecificPost(int postNumber) {
         Post post = null;
         for (int key: postMemoryDB.keySet()) {

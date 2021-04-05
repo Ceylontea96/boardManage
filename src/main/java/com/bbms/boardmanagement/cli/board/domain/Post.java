@@ -20,6 +20,7 @@ public class Post {
     private String comment;                                 //게시글 댓글 배열로 담기
     private static int postCount;                           //전체 게시글 수
     private int commentCount;                               //댓글 수
+    private String authorCode;                              //작성자 코드
 
 
 
@@ -29,13 +30,14 @@ public class Post {
     //생성자
 
 
-    public Post(String title, String author, String mainText) {
+    public Post(String title, String author, String mainText, String authorCode) {
         this.postNumber = ++sequence;
         this.title = title;
         this.author = author;
         this.userRank = "일반회원";
         this.reportingDate = dateTimeNow;
         this.mainText = mainText;
+        this.authorCode = authorCode;
 
     }
 
