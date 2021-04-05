@@ -34,7 +34,6 @@ public class MemoryPostRepository implements PostRepository {
         postMemoryDB.put(post3.getPostNumber(), post3);
         postMemoryDB.put(post4.getPostNumber(), post4);
 
-
     }
 
     @Override

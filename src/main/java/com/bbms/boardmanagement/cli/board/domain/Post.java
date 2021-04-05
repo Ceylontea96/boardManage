@@ -2,6 +2,7 @@ package com.bbms.boardmanagement.cli.board.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 //역할: 이 클래스는 하나의 게시글 정보를 저장할 수 있어야 한다.
 public class Post {
@@ -12,12 +13,15 @@ public class Post {
     private String title;                                   //게시글 제목
     private String author;                                  //게시글 작성자 이름
     private String userRank;                                //게시글 작성회원 등급(Member에서 가져오기)
-    private LocalDateTime reportingDate = dateTimeNow;      //게시글 작성시간
+    private LocalDateTime reportingDate;                    //게시글 작성시간
     private String mainText;                                //게시글 본문
     private int view;                                       //게시글 조회수
     private int recommend;                                  //게시글 추천수
     private String comment;                                 //게시글 댓글 배열로 담기
     private static int postCount;                           //전체 게시글 수
+    private int commentCount;                               //댓글 수
+
+
 
     private static int sequence;                           //게시글 번호 정하는 상수
 
