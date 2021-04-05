@@ -3,6 +3,7 @@ package com.bbms.boardmanagement.cli.board.repository;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.SystemMessage;
+import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,12 +57,19 @@ public class MemoryPostRepository implements PostRepository {
 
     @Override
     public void removePost(int postNumber) {
-
+        for (int key : postMemoryDB.keySet()) {
+            if(postNumber == key) {
+                postMemoryDB.remove(key);
+            }
+        }
     }
 
     @Override
     public void readMore(Post post) {
-
+        System.out.println("제목: " + post.getTitle());
+        System.out.println("작성자: " + post.getAuthor());
+        System.out.println("작성시간: " + post.getReportingDate());
+        System.out.println(post.getMainText());
     }
 
 
