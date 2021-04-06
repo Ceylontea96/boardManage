@@ -7,6 +7,7 @@ import com.bbms.boardmanagement.cli.user.domain.CheckCondition;
 import com.bbms.boardmanagement.cli.user.domain.User;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     private static void insertTestData() {
-        User user1 = new User("isec", "isec123", "아이섹", 1996, 10, 10, "남자", "안녕하세요 정보보호교육학원 아이섹입니다.");
+        User user1 = new User("isec", "isec123", "아이섹", 1996, 04, 07, "남자", "안녕하세요 정보보호교육학원 아이섹입니다.");
 
         userMemoryDB.put(user1.getUserCode(), user1);
 
@@ -173,7 +174,8 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public void congratulate(User user) {
-        if (LocalDate.now().equals(user.getBirth())) {
+        if (LocalDate.now().getMonth().equals(user.getBirth().getMonth())
+        && LocalDate.now().getDayOfMonth() == user.getBirth().getDayOfMonth()) {
             System.out.printf("\n[%s]님! 생일을 축하드립니다!!! 즐거운 하루 되세요~\n", user.getNickName());
         }
     }

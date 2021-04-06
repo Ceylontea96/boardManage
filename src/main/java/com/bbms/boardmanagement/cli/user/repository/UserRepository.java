@@ -1,5 +1,6 @@
 package com.bbms.boardmanagement.cli.user.repository;
 
+import com.bbms.boardmanagement.cli.user.domain.CheckCondition;
 import com.bbms.boardmanagement.cli.user.domain.User;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public interface UserRepository {
     User idCheck(String insetId);
 
     boolean pwCheck(String insertPw, User user);
+
+    //중복 체크
+    public boolean isOverlap(String insertString, CheckCondition condition);
 
     //비밀번호 변경
     void changePw(User user, String newPw);

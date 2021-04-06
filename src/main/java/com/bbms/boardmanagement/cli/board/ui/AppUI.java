@@ -108,6 +108,14 @@ public abstract class AppUI {
         System.out.println("=======================================");
     }
 
+    //9. 수정 내용 메뉴
+    public static void modifyChoiceScreen() {
+        System.out.println("\n============== 메뉴 =================");
+        System.out.println("### 1. 제목 수정하기");
+        System.out.println("### 2. 본문 수정하기");
+        System.out.println("### 3. 돌아가기");
+        System.out.println("=======================================");
+    }
 
 
 

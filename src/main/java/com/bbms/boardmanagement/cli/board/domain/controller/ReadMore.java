@@ -2,14 +2,16 @@ package com.bbms.boardmanagement.cli.board.domain.controller;
 
 import com.bbms.boardmanagement.cli.board.domain.controller.changePost.ChangePost;
 import com.bbms.boardmanagement.cli.board.ui.AppUI;
+import com.bbms.boardmanagement.cli.main.AppController;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
-public class ReadMore {
+public class ReadMore implements AppController {
 
-    private static void readMore(){
-        allDocumentIndexSearchMoreScreen();
+    @Override
+    public void start() {
         while (true){
+        allDocumentIndexSearchMoreScreen();
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1: // 수정
@@ -27,7 +29,8 @@ public class ReadMore {
                 case 5: // 돌아가기
                     return;
                 default:
-                    System.out.println("잘 못 입력");
+                    System.out.println("잘 못 입력하셨습니다.");
+                    return;
             }
         }// while 종료
     }

@@ -93,9 +93,13 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     @Override // 글 수정
-    public void changePost(int postNumber,String title ,String mainText) {
+    public void changeTitle(int postNumber,String title) {
         Post post = searchSpecificPost(postNumber);
         post.setTitle(title);
+    }
+
+    public void changeText(int postNumber,String mainText) {
+        Post post = searchSpecificPost(postNumber);
         post.setMainText(mainText);
     }
 

@@ -26,7 +26,7 @@ public class ChangePost {
             String newTitle = inputString(">>> ");
             System.out.println("변경할 내용을 입력해 주세요");
             String newMainText = inputString(">>> ");
-            postRepository.changePost(postNumber, newTitle, newMainText);
+//            postRepository.changePost(postNumber, newTitle, newMainText);
         }else{
             System.out.println("작성자 본인이 아닙니다.");
         }

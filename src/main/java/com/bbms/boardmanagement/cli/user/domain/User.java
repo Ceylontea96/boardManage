@@ -26,11 +26,12 @@ public class User {
     private String userCode;                                //유저코드
     private int postedPostCount;                            //작성한 게시글 수
     private int postedCommentCount;                         //작성한 댓글 수
-    private Rank userRank;
-    private Map<Integer, Post> myPost = new HashMap<>();
-    private Map<Integer, Comment> myComment = new HashMap<>();
+    private Rank userRank;                                  //회원등급
 
-    private static int userCount;                           //전체 유저 수
+    private Map<Integer, Post> myPost = new HashMap<>();        //내가 작성한 게시글 모음
+    private Map<Integer, Comment> myComment = new HashMap<>();  //내가 작성한 댓글 모음음
+
+   private static int userCount;                           //전체 유저 수
 
     private static int uSequence;                            //유저 번호 정하는 상수
 
@@ -44,6 +45,7 @@ public class User {
         this.gender = gender.trim();
         this.introduce = introduce;
         this.userCode = randomUserCode();
+        this.userRank = Rank.BRANCH;
         this.postedPostCount = 0;
         this.postedCommentCount = 0;
         //회원등급 초기화하기

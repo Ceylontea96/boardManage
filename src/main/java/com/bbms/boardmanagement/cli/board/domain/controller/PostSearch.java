@@ -1,12 +1,14 @@
 package com.bbms.boardmanagement.cli.board.domain.controller;
 
 import com.bbms.boardmanagement.cli.board.ui.AppUI;
+import com.bbms.boardmanagement.cli.main.AppController;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
-public class PostSearch {
+public class PostSearch implements AppController {
 
-    private static void postSearch() { //글 검색
+    @Override
+    public void start() {
         allDocumentIndexSearchScreen();
         while (true) {
             int selection = inputInteger(">>> ");
@@ -20,6 +22,5 @@ public class PostSearch {
                     System.out.println("잘 못 입력");
             }
         }//while 종료
-
     }
 }

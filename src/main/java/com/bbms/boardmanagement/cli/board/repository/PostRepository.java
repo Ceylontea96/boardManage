@@ -16,7 +16,9 @@ public interface PostRepository {
 
     //특정 게시글 수정
 //    void changePost(int postNumber, String title, String mainText);
-    void changePost(int postNumber, String Title ,String MainText);
+    void changeTitle(int postNumber, String Title);
+
+    void changeText(int postNumber, String mainText);
 
     //특정 게시글 찾기
     Post searchSpecificPost(int postNumber);

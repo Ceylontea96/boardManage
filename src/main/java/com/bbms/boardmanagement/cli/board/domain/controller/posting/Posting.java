@@ -1,13 +1,14 @@
 package com.bbms.boardmanagement.cli.board.domain.controller.posting;
 
 import com.bbms.boardmanagement.cli.board.domain.Post;
+import com.bbms.boardmanagement.cli.main.AppController;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
 import com.bbms.boardmanagement.cli.board.repository.PostRepository;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
-public class Posting {
+public class Posting implements AppController {
     private final PostRepository postRepository;
     public Posting() {
         postRepository = new MemoryPostRepository();
@@ -29,4 +30,8 @@ public class Posting {
     }
 
 
+    @Override
+    public void start() {
+
+    }
 }

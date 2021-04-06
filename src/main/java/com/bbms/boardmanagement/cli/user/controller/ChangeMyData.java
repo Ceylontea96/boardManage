@@ -1,10 +1,13 @@
 package com.bbms.boardmanagement.cli.user.controller;
 
+import com.bbms.boardmanagement.cli.main.AppController;
+
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
-public class ChangeMyData { // 내 정보 변경
+public class ChangeMyData implements AppController { // 내 정보 변경
 
-    private static void changeMyData() {
+    @Override
+    public void start() {
         myInformationChangeScreen(); // 내 정보 변경 메뉴
         while (true) {
             int selection = inputInteger(">>> ");
@@ -25,5 +28,4 @@ public class ChangeMyData { // 내 정보 변경
             }
         }//while 종료
     }
-
 }
