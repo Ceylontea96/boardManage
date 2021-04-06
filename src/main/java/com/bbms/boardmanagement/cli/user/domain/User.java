@@ -2,14 +2,20 @@ package com.bbms.boardmanagement.cli.user.domain;
 
 import com.bbms.boardmanagement.cli.board.domain.Grade;
 import com.bbms.boardmanagement.cli.board.domain.Post;
+import com.bbms.boardmanagement.cli.comment.Comment;
+import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
+import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.time.*;
+import java.util.Map;
 
 public class User {
 
     LocalDateTime dateTimeNow = LocalDateTime.now();
+    UserRepository userRepository = new MemoryUserRepository();
 
     private int userNumber;                                 //회원 번호
     private String id;                                      //회원 아이디
@@ -23,7 +29,8 @@ public class User {
     private int postedPostCount;                            //작성한 게시글 수
     private int postedCommentCount;                         //작성한 댓글 수
     private Rank userRank;
-    private List<Post> myPost;
+    private Map<Integer, Post> myPost = new HashMap<>();
+    private Map<Integer, Comment> myComment = new HashMap<>();
 
     private static int userCount;                           //전체 유저 수
 
@@ -45,9 +52,42 @@ public class User {
 
     }
 
-    private String randomUserCode() {
-        return "";
+    //내 게시글 목록에 추가 기능..
+    public void addMyPost(Post post) {
+        myPost.put(post.getPostNumber(), post);
     }
+
+    //내 게시글 목록에서 삭제 기능
+    public Post delMyPost(int postNumber) {
+        return myPost.remove(postNumber);
+    }
+
+    //내 댓글 목록에 추가 기능
+    public void addMyComment(Comment comment) {
+        myComment.put(comment.getCommentNumber(), comment);
+    }
+
+    //내 댓글 목록에서 삭제 기능
+    public Comment delMyComment(int commentNumber) {
+        return myComment.remove(commentNumber);
+    }
+
+    private String randomUserCode() {
+
+            char[] tmp = new char[5];
+            for(int i=0; i<tmp.length; i++) {
+                int div = (int) Math.floor( Math.random() * 2 );
+
+                if(div == 0) { // 0이면 숫자로
+                    tmp[i] = (char) (Math.random() * 10 + '0') ;
+                }else { //1이면 알파벳
+                    tmp[i] = (char) (Math.random() * 26 + 'A') ;
+                }
+            }
+            //중복여부 추가해야함
+            return new String(tmp);
+    }
+
 
 
 

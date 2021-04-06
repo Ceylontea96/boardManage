@@ -3,6 +3,7 @@ package com.bbms.boardmanagement.cli.board.repository;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.SystemMessage;
+import com.bbms.boardmanagement.cli.comment.Comment;
 import javafx.geometry.Pos;
 
 import java.time.format.DateTimeFormatter;
@@ -121,13 +122,19 @@ public class MemoryPostRepository implements PostRepository {
 
     @Override
     public void readMore(Post post) {
-        System.out.println("---------------------------------------");
+        System.out.println("================================================================================");
         System.out.println("제목: " + post.getTitle());
         System.out.println("작성자: " + post.getAuthor());
         System.out.println("회원등급: " +post.getUserRank());
         System.out.println("작성시간: " + post.getReportingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         System.out.println(post.getMainText());
+        System.out.println("댓글");
         System.out.println("---------------------------------------");
+        for (int key : post.getThisComment().keySet()) {
+            Comment comment = post.getThisComment().get(key);
+            System.out.println(comment);
+        }
+        System.out.println("==============================================================================");
     }
 
     //영화 검색 조건을 위한 인터페이스
