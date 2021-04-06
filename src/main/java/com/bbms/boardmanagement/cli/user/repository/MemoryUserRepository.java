@@ -1,7 +1,6 @@
 package com.bbms.boardmanagement.cli.user.repository;
 
 import com.bbms.boardmanagement.cli.user.domain.User;
-import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -42,6 +41,7 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     //아이디 체크
+    @Override
     public String idCheck(String insertId) {
         String userCode = null;
         for (String key : userMemoryDB.keySet()) {
@@ -57,9 +57,9 @@ public class MemoryUserRepository implements UserRepository {
 
 
     //비밀번호 체크
-    public boolean pwCheck(String inserPw, String userCode) {
+    public boolean pwCheck(String insertPw, String userCode) {
         boolean login = false;
-        if(inserPw.equals(userMemoryDB.get(userCode).getPassword())) {
+        if(insertPw.equals(userMemoryDB.get(userCode).getPassword())) {
             login = true;
         }
         return login;

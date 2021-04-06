@@ -8,4 +8,6 @@ import java.util.List;
 public class BoardController {
 
 //    List<Post> searchPostList(String keyword, SearchCondition condition);
+
+
 }
