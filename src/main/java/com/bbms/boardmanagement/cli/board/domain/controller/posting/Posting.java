@@ -1,11 +1,9 @@
 package com.bbms.boardmanagement.cli.board.domain.controller.posting;
 
 import com.bbms.boardmanagement.cli.board.domain.Post;
-import com.bbms.boardmanagement.cli.board.domain.User;
+import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
 import com.bbms.boardmanagement.cli.board.repository.PostRepository;
-import com.bbms.boardmanagement.cli.board.ui.AppUI;
-import javafx.geometry.Pos;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 

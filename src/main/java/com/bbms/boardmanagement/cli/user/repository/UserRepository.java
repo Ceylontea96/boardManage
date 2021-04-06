@@ -1,8 +1,9 @@
-package com.bbms.boardmanagement.cli.board.repository;
+package com.bbms.boardmanagement.cli.user.repository;
 
-import com.bbms.boardmanagement.cli.board.domain.User;
+import com.bbms.boardmanagement.cli.user.domain.User;
 
-import java.util.*;
+import java.util.List;
+
 public interface UserRepository {
 
     //회원가입
@@ -30,10 +31,10 @@ public interface UserRepository {
     void changeIntro(User user, String newIntro);
 
     //유저검색
-    void searchUser();
+    List<User> searchUserByNickName(String targetNickName);
 
     //생일축하 기능
-    void congratulate();
+    void congratulate(User user);
 
     //회원탈퇴
     void exit();

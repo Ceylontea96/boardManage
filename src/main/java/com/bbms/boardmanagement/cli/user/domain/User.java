@@ -1,4 +1,7 @@
-package com.bbms.boardmanagement.cli.board.domain;
+package com.bbms.boardmanagement.cli.user.domain;
+
+import com.bbms.boardmanagement.cli.board.domain.Grade;
+import com.bbms.boardmanagement.cli.board.domain.Post;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,12 +16,13 @@ public class User {
     private String password;                                //회원 비밀번호
     private String nickName;                                //회원 닉네임
     private LocalDateTime joinDate;                         //가입일
-    private LocalDate birth;                            //생일
+    private LocalDate birth;                                //생일
     private String gender;                                  //성별
     private String introduce;                               //자기소개
     private String userCode;                                //유저코드
     private int postedPostCount;                            //작성한 게시글 수
     private int postedCommentCount;                         //작성한 댓글 수
+    private Rank userRank;
     private List<Post> myPost;
 
     private static int userCount;                           //전체 유저 수
@@ -37,6 +41,8 @@ public class User {
         this.userCode = randomUserCode();
         this.postedPostCount = 0;
         this.postedCommentCount = 0;
+        //회원등급 초기화하기
+
     }
 
     private String randomUserCode() {
@@ -156,5 +162,13 @@ public class User {
 
     public static void setuSequence(int uSequence) {
         User.uSequence = uSequence;
+    }
+
+    public Rank getUserRank() {
+        return userRank;
+    }
+
+    public void setUserRank(Rank userRank) {
+        this.userRank = userRank;
     }
 }

@@ -1,14 +1,15 @@
-package com.bbms.boardmanagement.cli.board.repository;
+package com.bbms.boardmanagement.cli.user.repository;
 
-import com.bbms.boardmanagement.cli.board.domain.Post;
-import com.bbms.boardmanagement.cli.board.domain.User;
+import com.bbms.boardmanagement.cli.user.domain.User;
+import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryUserRepository implements UserRepository{
+public class MemoryUserRepository implements UserRepository {
 
     private final static Map<String, User> userMemoryDB = new HashMap<>();
 
@@ -67,17 +68,27 @@ public class MemoryUserRepository implements UserRepository{
 
     @Override
     public void changePw(User user, String newPw) {
-
+        user.setPassword(newPw);
     }
 
     @Override
     public void changeNickName(User user, String newNickName) {
-
+        user.setNickName(newNickName);
     }
 
     @Override
     public void myInfo(User user) {
-
+        System.out.println("===========================");
+        System.out.println("회원 번호: " + user.getUserNumber());
+        System.out.println("회원 ID: " + user.getId());
+        System.out.println("회원 닉네임: " + user.getNickName());
+        System.out.println("가입 날짜: " + user.getJoinDate());
+        System.out.println("생일: " + user.getBirth());
+        System.out.println("성별: " + user.getGender());
+        System.out.println("자기소개: " + user.getIntroduce());
+        System.out.println("내가 작성한 게시글 수: " + user.getPostedPostCount());
+        System.out.println("내가 작성한 댓글 수: " + user.getPostedCommentCount());
+        System.out.println("=================================");
     }
 
     @Override
@@ -92,17 +103,27 @@ public class MemoryUserRepository implements UserRepository{
 
     @Override
     public void changeIntro(User user, String newIntro) {
-
+        user.setIntroduce(newIntro);
     }
 
     @Override
-    public void searchUser() {
+    public List<User> searchUserByNickName(String targetNickName) {
+        List<User> userList = new ArrayList<>();
+        for (String key : userMemoryDB.keySet()) {
+            User user = userMemoryDB.get(key);
 
+            if (user.getNickName().equals(targetNickName)) {
+                userList.add(user);
+            }
+        }
+        return userList;
     }
 
     @Override
-    public void congratulate() {
-
+    public void congratulate(User user) {
+        if (LocalDate.now().equals(user.getBirth())) {
+            System.out.printf("\n[%s]님! 생일을 축하드립니다!!! 즐거운 하루 되세요~\n", user.getNickName());
+        }
     }
 
     @Override
