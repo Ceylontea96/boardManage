@@ -1,5 +1,6 @@
 package com.bbms.boardmanagement.cli.user.repository;
 
+import com.bbms.boardmanagement.cli.Session;
 import com.bbms.boardmanagement.cli.user.domain.User;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.Map;
 public class MemoryUserRepository implements UserRepository {
 
     private final static Map<String, User> userMemoryDB = new HashMap<>();
+    private static Session currentSession = new Session();
 
     static {
         insertTestData();
@@ -23,6 +25,13 @@ public class MemoryUserRepository implements UserRepository {
 
     }
 
+    public User getLoginUser() {
+        return currentSession.getUserNow();
+    }
+
+    public static Session getCurrentSession() {
+        return currentSession;
+    }
 
     @Override
     public void join(User user) {
@@ -42,24 +51,24 @@ public class MemoryUserRepository implements UserRepository {
 
     //아이디 체크
     @Override
-    public String idCheck(String insertId) {
-        String userCode = null;
+    public User idCheck(String insertId) {
+        User user1 = null;
         for (String key : userMemoryDB.keySet()) {
             User user = userMemoryDB.get(key);
 
-            if (insertId.equals(user.getId())) {
-                userCode = key;
-                return userCode;
+            if (user.getId().equals(insertId)) {
+                user1 = user;
             }
         }
-        return userCode;
+
+        return user1;
     }
 
 
     //비밀번호 체크
-    public boolean pwCheck(String insertPw, String userCode) {
+    public boolean pwCheck(String insertPw, User user) {
         boolean login = false;
-        if(insertPw.equals(userMemoryDB.get(userCode).getPassword())) {
+        if (user.getPassword().equals(insertPw)) {
             login = true;
         }
         return login;

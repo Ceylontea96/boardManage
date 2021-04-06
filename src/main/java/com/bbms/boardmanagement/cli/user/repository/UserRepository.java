@@ -12,9 +12,9 @@ public interface UserRepository {
     //로그인
     void login(String id, String pw);
 
-    String idCheck(String insetId);
+    User idCheck(String insetId);
 
-    boolean pwCheck(String insertPw, String userCode);
+    boolean pwCheck(String insertPw, User user);
 
     //비밀번호 변경
     void changePw(User user, String newPw);
