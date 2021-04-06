@@ -3,7 +3,6 @@ package com.bbms.boardmanagement.cli.board.repository;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.SystemMessage;
-import com.bbms.boardmanagement.cli.board.domain.controller.changePost.ChangePost;
 import javafx.geometry.Pos;
 
 import java.time.format.DateTimeFormatter;

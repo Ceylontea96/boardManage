@@ -16,7 +16,7 @@ class MemoryPostRepositoryTest {
     @Test
     @DisplayName("게시글을 저장요청하면 메모리DB에 잘 저장되어야 한다.")
     void insertTest() {
-        Post post1 = new Post("제목1", "글쓴이1", "내용없음1");
+        Post post1 = new Post("제목1", "글쓴이1", "내용없음1","");
 
         repository.posting(post1);
 
