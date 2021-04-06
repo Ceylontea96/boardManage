@@ -2,6 +2,7 @@ package com.bbms.boardmanagement.cli.board.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 //역할: 이 클래스는 하나의 게시글 정보를 저장할 수 있어야 한다.
 public class Post {
@@ -12,25 +13,34 @@ public class Post {
     private String title;                                   //게시글 제목
     private String author;                                  //게시글 작성자 이름
     private String userRank;                                //게시글 작성회원 등급(Member에서 가져오기)
-    private LocalDateTime reportingDate = dateTimeNow;      //게시글 작성시간
+    private LocalDateTime reportingDate;                    //게시글 작성시간
     private String mainText;                                //게시글 본문
     private int view;                                       //게시글 조회수
     private int recommend;                                  //게시글 추천수
     private String comment;                                 //게시글 댓글 배열로 담기
+    private static int postCount;                           //전체 게시글 수
+    private int commentCount;                               //댓글 수
 
-    private static int postCount;                           //게시글 수 (전체 글 배열의 사이즈로 파악)
+
+
+    private String authorCode;                              //작성자 코드
+
+
+
+    private static int sequence;                           //게시글 번호 정하는 상수
 
 
     //생성자
 
 
-    public Post(String title, String author, String mainText) {
-        this.postNumber = ++postCount;
+    public Post(String title, String author, String mainText, String authorCode) {
+        this.postNumber = ++sequence;
         this.title = title;
         this.author = author;
         this.userRank = "일반회원";
         this.reportingDate = dateTimeNow;
         this.mainText = mainText;
+        this.authorCode = authorCode;
 
     }
 
@@ -46,12 +56,13 @@ public class Post {
 
     public String toString() {
 
-        return String.format
+        /*return String.format
                 ("제목: %s\n글쓴이: %s\n작성시간: %s\n%s\n추천수: %d\n",
                         title, author,
                         reportingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-                        mainText, recommend);
-    } //추후에 댓글 추가
+                        mainText, recommend);*/
+        return String.format("%d    %s              %s      %s      %d      %d\n", postNumber, title, author, reportingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), view, recommend);
+    }
 
     //getter 및 setter
 
@@ -133,5 +144,27 @@ public class Post {
 
     public static void setPostCount(int postCount) {
         Post.postCount = postCount;
+    }
+
+    public static int getSequence() {
+        return sequence;
+    }
+
+    public static void setSequence(int sequence) {
+        Post.sequence = sequence;
+    }
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+    public String getAuthorCode() {
+        return authorCode;
+    }
+
+    public void setAuthorCode(String authorCode) {
+        this.authorCode = authorCode;
     }
 }

@@ -16,7 +16,7 @@ class MemoryPostRepositoryTest {
     @Test
     @DisplayName("게시글을 저장요청하면 메모리DB에 잘 저장되어야 한다.")
     void insertTest() {
-        Post post1 = new Post("제목1", "글쓴이1", "내용없음1");
+        Post post1 = new Post("제목1", "글쓴이1", "내용없음1","");
 
         repository.posting(post1);
 
@@ -34,14 +34,19 @@ class MemoryPostRepositoryTest {
     }
 
     @Test
-    @DisplayName("모든 게시글 조회")
-    void showAll() {
+    @DisplayName("삭제")
+    void remove() {
 
     }
 
     @Test
-    @DisplayName("간단 테스트")
+    @DisplayName("조건별 검색")
     void normalTest() {
-
+        repository.removePost(3);
+        List<Post> postList = repository.searchPostList("제목", SearchCondition.ALL);
+        for (Post post : postList) {
+            System.out.println(post);
+            repository.readMore(post);
+        }
     }
 }

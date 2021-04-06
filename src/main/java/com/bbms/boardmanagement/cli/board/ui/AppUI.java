@@ -3,8 +3,14 @@ package com.bbms.boardmanagement.cli.board.ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
+//역할: 화면 출력 텍스트 모음 클래스
 public abstract class AppUI {
-   private static Scanner sc = new Scanner(System.in);
+
+
+    private static Scanner sc = new Scanner(System.in);
+
+    //입력 유틸메서드
 
     //정수 입력 메서드
     public static int inputInteger(String msg) {
@@ -20,11 +26,13 @@ public abstract class AppUI {
         }
     }
 
-    //메뉴의 번호를 입력 받는 메서드
+
+    //문자열 입력 메서드
     public static String inputString(String msg) {
         System.out.print(msg);
         return sc.nextLine();
     }
+
     //1.최초 화면
     public static void startScreen() {
         System.out.println("\n============== 메뉴 =================");
@@ -99,6 +107,7 @@ public abstract class AppUI {
         System.out.println("### 2. 돌아가기");
         System.out.println("=======================================");
     }
+
 
 
 
