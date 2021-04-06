@@ -41,7 +41,7 @@ public interface UserRepository {
     void congratulate(User user);
 
     //회원탈퇴
-    void exit();
+    User deleteUser(User user);
 
 
 

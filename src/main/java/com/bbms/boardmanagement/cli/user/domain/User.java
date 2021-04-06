@@ -1,6 +1,5 @@
 package com.bbms.boardmanagement.cli.user.domain;
 
-import com.bbms.boardmanagement.cli.board.domain.Grade;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.comment.Comment;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
@@ -8,7 +7,6 @@ import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.time.*;
 import java.util.Map;
 
@@ -210,5 +208,21 @@ public class User {
 
     public void setUserRank(Rank userRank) {
         this.userRank = userRank;
+    }
+
+    public Map<Integer, Post> getMyPost() {
+        return myPost;
+    }
+
+    public void setMyPost(Map<Integer, Post> myPost) {
+        this.myPost = myPost;
+    }
+
+    public Map<Integer, Comment> getMyComment() {
+        return myComment;
+    }
+
+    public void setMyComment(Map<Integer, Comment> myComment) {
+        this.myComment = myComment;
     }
 }

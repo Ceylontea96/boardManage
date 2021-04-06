@@ -1,6 +1,6 @@
 package com.bbms.boardmanagement.cli.user.domain;
 
-public enum Rank {
+public enum CheckCondition {
 
-    EARTH, FOREST, TREE, BRANCH
+    ID, PW, NICKNAME
 }

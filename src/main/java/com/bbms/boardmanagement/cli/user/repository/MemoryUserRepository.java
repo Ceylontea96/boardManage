@@ -1,6 +1,9 @@
 package com.bbms.boardmanagement.cli.user.repository;
 
 import com.bbms.boardmanagement.cli.Session;
+import com.bbms.boardmanagement.cli.board.domain.Post;
+import com.bbms.boardmanagement.cli.comment.Comment;
+import com.bbms.boardmanagement.cli.user.domain.CheckCondition;
 import com.bbms.boardmanagement.cli.user.domain.User;
 
 import java.time.LocalDate;
@@ -49,6 +52,7 @@ public class MemoryUserRepository implements UserRepository {
         }
     }
 
+
     //아이디 체크
     @Override
     public User idCheck(String insertId) {
@@ -73,6 +77,39 @@ public class MemoryUserRepository implements UserRepository {
         }
         return login;
     }
+
+    //중복 체크
+    public boolean isOverlap(String insertString, CheckCondition condition) {
+        boolean isOL = false;
+
+        switch (condition) {
+            case ID:
+                isOL = overLap(insertString, (iS, u) -> iS.equals(u.getId()));
+                break;
+            case PW:
+                isOL = overLap(insertString, (iS, u) -> iS.equals(u.getPassword()));
+                break;
+            case NICKNAME:
+                isOL = overLap(insertString, (iS, u) -> iS.equals(u.getNickName()));
+                break;
+        }
+
+        return isOL;
+    }
+
+    //중복 체크 전용 메서드
+    private boolean overLap(String insertString, UserPredicate up) {
+        boolean overlap = false;
+        for (String key : userMemoryDB.keySet()) {
+            User user = userMemoryDB.get(key);
+
+            if(up.test(insertString, user)) {
+                overlap = true;
+            }
+        }
+        return overlap;
+    }
+
 
 
     @Override
@@ -102,12 +139,18 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public void myPost(User user) {
-
+        for (int key : user.getMyPost().keySet()) {
+            Post post = user.getMyPost().get(key);
+            System.out.println(post);
+        }
     }
 
     @Override
     public void myComment(User user) {
-
+        for (int key : user.getMyComment().keySet()) {
+            Comment comment = user.getMyComment().get(key);
+            System.out.println(comment);
+        }
     }
 
     @Override
@@ -136,7 +179,12 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public void exit() {
+    public User deleteUser(User user) {
+        return userMemoryDB.remove(user.getUserCode());
+    }
 
+    @FunctionalInterface
+    interface UserPredicate {
+        boolean test(String inputString, User user);
     }
 }
