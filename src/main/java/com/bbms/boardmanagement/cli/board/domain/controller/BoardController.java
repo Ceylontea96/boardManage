@@ -9,4 +9,5 @@ public class BoardController {
 
 //    List<Post> searchPostList(String keyword, SearchCondition condition);
 
+
 }

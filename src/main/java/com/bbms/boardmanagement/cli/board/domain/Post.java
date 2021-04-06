@@ -1,8 +1,13 @@
 package com.bbms.boardmanagement.cli.board.domain;
 
+import com.bbms.boardmanagement.cli.comment.Comment;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //역할: 이 클래스는 하나의 게시글 정보를 저장할 수 있어야 한다.
 public class Post {
@@ -17,10 +22,10 @@ public class Post {
     private String mainText;                                //게시글 본문
     private int view;                                       //게시글 조회수
     private int recommend;                                  //게시글 추천수
-    private String comment;                                 //게시글 댓글 배열로 담기
     private static int postCount;                           //전체 게시글 수
     private int commentCount;                               //댓글 수
 
+    private Map<Integer, Comment> thisComment = new HashMap<>();  //게시글 댓글 배열로 담기
 
 
     private String authorCode;                              //작성자 코드
@@ -44,6 +49,14 @@ public class Post {
 
     }
 
+    //내 댓글 목록에 추가 기능
+    public void addComment(Comment comment) {
+        thisComment.put(comment.getCommentNumber(), comment);
+    }
+    //내 댓글 목록에서 삭제 기능
+    public Comment delComment(int commentNumber) {
+        return thisComment.remove(commentNumber);
+    }
 
 
 
@@ -130,13 +143,13 @@ public class Post {
         this.recommend = recommend;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+//    public String getComment() {
+//        return comment;
+//    }
+//
+//    public void setComment(String comment) {
+//        this.comment = comment;
+//    }
 
     public static int getPostCount() {
         return postCount;
@@ -166,5 +179,13 @@ public class Post {
 
     public void setAuthorCode(String authorCode) {
         this.authorCode = authorCode;
+    }
+
+    public Map<Integer, Comment> getThisComment() {
+        return thisComment;
+    }
+
+    public void setThisComment(Map<Integer, Comment> thisComment) {
+        this.thisComment = thisComment;
     }
 }
