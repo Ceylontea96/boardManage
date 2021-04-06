@@ -1,25 +1,25 @@
 package com.bbms.boardmanagement.cli.user.controller;
 
 import com.bbms.boardmanagement.cli.board.ui.AppUI;
-import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
-public class ChangePw {
+public class ChangeNickName {
     private final UserRepository userRepository;
-
-    public ChangePw() {
+    public ChangeNickName() {
         userRepository = new MemoryUserRepository();
     }
 
-    private void modifyPw(User user) {
-        System.out.println("비밀번호 변경");
-        String newPw = inputString(">>> ");
-//        userRepository.changePw(nowUserCode,newPw);
+   private void changeNickName(){
+       System.out.println("변경할 닉네임 입력");
+       String newNickName = inputString(">>> ");
+//       userRepository.changeNickName(nowUserCode, newNickName);
+   }
 
 
-    }
+
+
 
 }
