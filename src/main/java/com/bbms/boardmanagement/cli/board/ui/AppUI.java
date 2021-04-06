@@ -37,7 +37,7 @@ public abstract class AppUI {
     public static void startScreen() {
         System.out.println("\n============== 메뉴 =================");
         System.out.println("### 1. 로그인");
-        System.out.println("### 2. 글 목록");
+        System.out.println("### 2. 회원가입");
         System.out.println("### 3. 프로그램 종료");
         System.out.println("=======================================");
     }
