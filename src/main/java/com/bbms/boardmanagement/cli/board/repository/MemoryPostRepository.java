@@ -16,13 +16,16 @@ import static com.bbms.boardmanagement.cli.board.domain.Post.setPostCount;
 
 public class MemoryPostRepository implements PostRepository {
 
-    private final static Map<Integer, Post> postMemoryDB = new HashMap<>();
+
+    private final static Map<Integer, Post> postMemoryDB = new HashMap<>(); //Map을 이용해서 작성
+
 
     static {
         insertTestData();
     }
 
     private static void insertTestData() {
+
         Post post1 = new Post("제목1", "글쓴이1", "아무내용없음1", "");
         Post post2 = new Post("제목2", "글쓴이2", "아무내용없음2", "");
         Post post3 = new Post("제목3", "글쓴이3", "아무내용없음3", "");
@@ -37,7 +40,9 @@ public class MemoryPostRepository implements PostRepository {
 
     @Override
     public void posting(Post post) {        //게시글 추가
+
         postMemoryDB.put(post.getPostNumber(), post);
+
     }
 
     @Override
