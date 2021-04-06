@@ -7,6 +7,8 @@ import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
+import com.bbms.boardmanagement.cli.Session;
+
 public class Login {
     private final UserRepository userRepository;
 
@@ -17,16 +19,19 @@ public class Login {
     private void idCheck() {
         System.out.println("아이디를 입력해 주세요");
         String id = inputString(">>> ");
-        String userCode = userRepository.idCheck(id);
+        User user = userRepository.idCheck(id);
         String pw = inputString(">>> ");
-        boolean loginCheck = userRepository.pwCheck(pw, userCode);
-        if (userCode != null) {
-            if (loginCheck) {
-                //nowUser = userCode
-                System.out.println("로그인 되셨습니다");
-            }
-        }else {
-            System.out.println("아이디 또는 비밀번호가 잘못되었습니다.");
+        boolean loginCheck = userRepository.pwCheck(pw, user);
+
+        if (loginCheck) {
+
+            MemoryUserRepository.getCurrentSession().setUserNow(user);
+            User userNow =  MemoryUserRepository.getCurrentSession().getUserNow();
+            System.out.println("로그인 되셨습니다");
+        } else {
+            System.out.println("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
         }
+
+
     }
 }
