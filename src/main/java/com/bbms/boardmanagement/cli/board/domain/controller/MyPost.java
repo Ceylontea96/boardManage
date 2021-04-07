@@ -57,7 +57,6 @@ public class MyPost implements AppController { //내 글 보기
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    return;
 
             }
 
@@ -70,6 +69,10 @@ public class MyPost implements AppController { //내 글 보기
         while (true) {
             System.out.println("수정할 게시글 번호를 입력해주세요.");
             int postNumber = inputInteger(">>> ");
+            if(postNumber == 0){
+                System.out.println("게시글 수정을 종료합니다.");
+                break;
+            }
             if (postNums.contains(postNumber)) {
                 modifyChoiceScreen();
                 int selection = inputInteger(">>> ");
@@ -77,18 +80,26 @@ public class MyPost implements AppController { //내 글 보기
                     case 1: //제목 수정
                         System.out.println("새로운 제목을 입력해주세요.");
                         String newTitle = inputString(">>> ");
+                        if(newTitle.equals("0")){
+                            System.out.println("제목 수정을 종료합니다");
+                            break;
+                        }
                         postRepository.changeTitle(postNumber, newTitle);
                         break;
                     case 2: //본문 수정
                         System.out.println("새로운 본문을 입력해주세요.");
                         String newText = inputString(">>> ");
+                        if(newText.equals("0")){
+                            System.out.println("본문 수정을 종료합니다.");
+                            break;
+                        }
                         postRepository.changeText(postNumber, newText);
                         break;
                     case 3:
                         return;
                     default:
                         System.out.println("잘 못 입력하셨습니다.");
-                        return;
+                        continue;
                 }
             } else {
                 System.out.println("내 게시글 목록중에서만 수정할 수 있습니다.");
@@ -106,6 +117,10 @@ public class MyPost implements AppController { //내 글 보기
         while (true) {
             System.out.println("삭제할 게시글 번호를 입력해주세요.");
             int postNumber = inputInteger(">>> ");
+            if(postNumber==0){
+                System.out.println("게시글 삭제를 종료합니다.");
+                break;
+            }
             if (postNums.contains(postNumber)) {
                 postRepository.removePost(postNumber);
                 System.out.println("게시글이 정상적으로 삭제되었습니다.");

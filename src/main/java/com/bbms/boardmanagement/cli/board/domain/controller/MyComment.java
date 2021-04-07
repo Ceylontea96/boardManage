@@ -52,7 +52,6 @@ public class MyComment implements AppController { // 내 댓글
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    return;
             }
         }//while 종료
     }
@@ -62,15 +61,22 @@ public class MyComment implements AppController { // 내 댓글
         while (true) {
             System.out.println("수정할 댓글 번호를 입력해주세요.");
             int commentNum = inputInteger(">>> ");
+            if (commentNum == 0) {
+                System.out.println("댓글 수정을 종료합니다.");
+                break;
+            }
             if (commentNums.contains(commentNum)) {
                 System.out.println("새로운 댓글 내용을 입력해주세요.");
                 String newComment = inputString(">>> ");
+                if(newComment.equals("0")){
+                    System.out.println("댓글 수정을 종료합니다.");
+                    break;
+                }
                 commentRepository.changeComment(commentNum, newComment);
                 System.out.println("댓글 수정 완료!");
                 break;
             } else {
                 System.out.println("내 댓글 목록중에서만 수정할 수 있습니다.");
-                continue;
             }
         }
     }
@@ -80,6 +86,10 @@ public class MyComment implements AppController { // 내 댓글
 
             System.out.println("삭제할 댓글 번호를 입력해주세요.");
             int commentNum = inputInteger(">>> ");
+            if(commentNum == 0){
+                System.out.println("댓글 삭제를 종료합니다");
+                break;
+            }
             if (commentNums.contains(commentNum)) {
                 System.out.println("정말 삭제하시겠습니까?");
                 System.out.println("1. 네,  2. 아니요");
@@ -87,13 +97,12 @@ public class MyComment implements AppController { // 내 댓글
                 if (selection == 1) {
                     commentRepository.deleteComment(commentNum);
                     System.out.println("댓글 삭제 완료!");
-                    break;
                 } else {
-                    continue;
+                    System.out.println("댓글 삭제를 취소했습니다.");
                 }
+                break;
             } else {
                 System.out.println("내 댓글 목록중에서만 삭제할 수 있습니다.");
-                continue;
             }
         }
     }
