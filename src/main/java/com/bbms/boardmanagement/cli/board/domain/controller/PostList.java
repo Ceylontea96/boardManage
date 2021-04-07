@@ -30,7 +30,10 @@ public class PostList implements AppController { // 글 목록 보여주기
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1: // 자세히
-                    appController = new ReadMore();
+                    System.out.println("게시글 번호를 입력해주세요.");
+                    int postNum = inputInteger(">>> ");
+                    ReadMore.readMore(postNum);
+
                     break;
                 case 2: //글 검색
                     appController = new PostSearch();
@@ -62,7 +65,7 @@ public class PostList implements AppController { // 글 목록 보여주기
         //저장할 게시글 객체화
         Post post = new Post(title, author, mainText,authorCode);
         //저장소에 저장
-        postRepository.posting(post);
+        postRepository.posting(post, userNow);
         System.out.printf("\n### [%s] 게시글이 정상 추가되었습니다.\n", post.getTitle());
     }
 }

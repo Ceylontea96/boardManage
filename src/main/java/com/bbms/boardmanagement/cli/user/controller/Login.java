@@ -22,7 +22,8 @@ public class Login implements AppController {
         login();
 
         while (true) {
-        boardMainScreen();
+            if (MemoryUserRepository.getCurrentSession().getUserNow() == null) return;
+            boardMainScreen();
             int selection = inputInteger(">>> ");
             switch (selection) { // 로그인이 된 다음 보여주는 스위치
                 case 1: // 내 정보
@@ -36,7 +37,7 @@ public class Login implements AppController {
                     return;
                 default:
                     System.out.println("잘못된 번호를 입력하셨습니다.");
-                    return;
+                    continue;
             }
             appController.start();
         }

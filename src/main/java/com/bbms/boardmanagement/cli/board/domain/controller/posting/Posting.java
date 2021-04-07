@@ -25,7 +25,7 @@ public class Posting implements AppController {
         //저장할 게시글 객체화
         Post post = new Post(title, author, mainText,authorCode);
         //저장소에 저장
-        postRepository.posting(post);
+        postRepository.posting(post, userNow);
         System.out.printf("\n### [%s] 게시글이 정상 추가되었습니다.\n", post.getTitle());
     }
 

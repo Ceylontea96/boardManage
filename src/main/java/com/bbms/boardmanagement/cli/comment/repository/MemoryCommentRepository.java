@@ -3,11 +3,13 @@ package com.bbms.boardmanagement.cli.comment.repository;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.comment.Comment;
 import com.bbms.boardmanagement.cli.user.domain.User;
+import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MemoryCommentRepository implements CommentRepository {
+
 
     private final static Map<Integer, Comment> commentMemoryDB = new HashMap<>();
 
@@ -28,8 +30,9 @@ public class MemoryCommentRepository implements CommentRepository {
     }
 
     @Override
-    public void addComment(Comment comment) {
+    public void addComment(Comment comment, User user) {
         commentMemoryDB.put(comment.getCommentNumber(), comment);
+        user.addMyComment(comment);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class MyComment implements AppController { // 내 댓글
                     //댓글 삭제 기능
                     break;
                 case 3: // 자세히 보기
-                    //자세히 보기 기능
+
                     break;
                 case 4: // 돌아가기
                     return;

@@ -21,7 +21,7 @@ public class Post {
     private LocalDateTime reportingDate;                    //게시글 작성시간
     private String mainText;                                //게시글 본문
     private int view;                                       //게시글 조회수
-    private int recommend;                                  //게시글 추천수
+    public int recommend;                                  //게시글 추천수
     private static int postCount;                           //전체 게시글 수
     private int commentCount;                               //댓글 수
 

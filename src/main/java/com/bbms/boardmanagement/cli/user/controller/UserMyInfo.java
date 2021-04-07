@@ -4,6 +4,7 @@ import com.bbms.boardmanagement.cli.board.domain.controller.MyComment;
 import com.bbms.boardmanagement.cli.board.domain.controller.MyPost;
 import com.bbms.boardmanagement.cli.board.ui.AppUI;
 import com.bbms.boardmanagement.cli.main.AppController;
+import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
@@ -18,9 +19,10 @@ public class UserMyInfo implements AppController { // 내 정보 보여주기
 
     @Override
     public void start() {
+        User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
         userRepository.myInfo(getCurrentSession().getUserNow());//내정보 출력
         while (true) {
-        myInformationScreen(); // 내 정보 메뉴
+            myInformationScreen(); // 내 정보 메뉴
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1:// 내 글
@@ -33,7 +35,14 @@ public class UserMyInfo implements AppController { // 내 정보 보여주기
                     appController = new ChangeMyData();
                     break;
                 case 4://회원탈퇴
-                    //new delMyAccount();
+                    System.out.println("정말 탈퇴하시겠습니다.");
+                    System.out.println("### 1. 예  2. 아니요.");
+                    int selection1 = inputInteger(">>> ");
+                    if (selection1 == 1) {
+                        userRepository.deleteUser(userNow);
+                        MemoryUserRepository.getCurrentSession().setUserNow(null);
+                        return;
+                    }
                     break;
                 case 5://돌아가기
                     return;

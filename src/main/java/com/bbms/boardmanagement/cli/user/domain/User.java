@@ -6,8 +6,10 @@ import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.*;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -51,24 +53,38 @@ public class User {
         //회원등급 초기화하기
 
     }
+    //List<Post>로 뽑아내기
+    public List<Post> myPostList() {
+        List<Post> postList = new ArrayList<>();
+        for (int key : myPost.keySet()) {
+            Post post = myPost.get(key);
+
+            postList.add(post);
+        }
+        return postList;
+    }
 
     //내 게시글 목록에 추가 기능..
     public void addMyPost(Post post) {
         myPost.put(post.getPostNumber(), post);
+        this.postedPostCount++;
     }
 
     //내 게시글 목록에서 삭제 기능
     public Post delMyPost(int postNumber) {
+        this.postedPostCount--;
         return myPost.remove(postNumber);
     }
 
     //내 댓글 목록에 추가 기능
     public void addMyComment(Comment comment) {
         myComment.put(comment.getCommentNumber(), comment);
+        this.postedCommentCount++;
     }
 
     //내 댓글 목록에서 삭제 기능
     public Comment delMyComment(int commentNumber) {
+        this.postedCommentCount++;
         return myComment.remove(commentNumber);
     }
 

@@ -4,6 +4,9 @@ import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.SystemMessage;
 import com.bbms.boardmanagement.cli.comment.Comment;
+import com.bbms.boardmanagement.cli.user.domain.User;
+import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
+import com.bbms.boardmanagement.cli.user.repository.UserRepository;
 import javafx.geometry.Pos;
 
 import java.time.format.DateTimeFormatter;
@@ -19,7 +22,6 @@ public class MemoryPostRepository implements PostRepository {
 
 
     private final static Map<Integer, Post> postMemoryDB = new HashMap<>(); //Map을 이용해서 작성
-
 
     static {
         insertTestData();
@@ -40,10 +42,10 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     @Override
-    public void posting(Post post) {        //게시글 추가
+    public void posting(Post post, User user) {        //게시글 추가
 
         postMemoryDB.put(post.getPostNumber(), post);
-
+        user.addMyPost(post);
     }
 
     @Override
@@ -155,7 +157,18 @@ public class MemoryPostRepository implements PostRepository {
         System.out.println("==============================================================================");
     }
 
-    //영화 검색 조건을 위한 인터페이스
+    //게시글 검증
+    public List<Integer> integrity (List<Post> postList) {
+        List<Integer> postNums = new ArrayList<>();
+
+        for (Post post : postList) {
+            postNums.add(post.getPostNumber());
+        }
+        return postNums;
+    }
+
+
+    //게시글 검색 조건을 위한 인터페이스
     @FunctionalInterface
     interface PostPredicate {
         boolean test(String keyword, Post post);

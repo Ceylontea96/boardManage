@@ -26,7 +26,7 @@ public class ChangeMyData implements AppController { // 내 정보 변경
                     changePw(userNow);
                     break;
                 case 3: // 내 소개 변경
-
+                    changeIntro(userNow);
                     break;
                 case 4: // 돌아가기
                     return;
@@ -64,5 +64,12 @@ public class ChangeMyData implements AppController { // 내 정보 변경
         } else {
             System.out.println("비밀번호가 다릅니다.");
         }
+    }
+
+    //내 소개 변경
+    private void changeIntro(User user) {
+        System.out.println("새로운 자기소개를 입력해주세요.");
+        String newIntro = inputString(">>> ");
+        user.setIntroduce(newIntro);
     }
 }

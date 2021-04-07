@@ -15,6 +15,7 @@ import java.util.List;
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
 public class MyPost implements AppController { //내 글 보기
+    private static AppController appController;
 
     UserRepository userRepository = new MemoryUserRepository();
     PostRepository postRepository = new MemoryPostRepository();
@@ -24,21 +25,20 @@ public class MyPost implements AppController { //내 글 보기
     @Override
     public void start() {
         User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
-        userRepository.myPost(userNow);
-        if (userNow.getMyPost().size() == 0) {
-            System.out.println("내가 작성한 글이 없습니다.");
-            return;
-        }
 
-
-        for (int key : userNow.getMyPost().keySet()) {
-            Post post = userNow.getMyPost().get(key);
-
-            postNums.add(post.getPostNumber());
-        }
-
-        myDocumentAndCommentScreen();
         while (true) {
+            userRepository.myPost(userNow);
+            if (userNow.getMyPost().size() == 0) {
+                System.out.println("내가 작성한 글이 없습니다.");
+                return;
+            }
+
+            for (int key : userNow.getMyPost().keySet()) {
+                Post post = userNow.getMyPost().get(key);
+
+                postNums.add(post.getPostNumber());
+            }
+            myDocumentAndCommentScreen();
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1: // 수정
@@ -50,7 +50,7 @@ public class MyPost implements AppController { //내 글 보기
                     delete();
                     break;
                 case 3: // 자세히 보기
-                    //자세히 보기 기능
+                    appController = new PostDetail();
                     break;
                 case 4: // 돌아가기
                     return;
@@ -59,62 +59,60 @@ public class MyPost implements AppController { //내 글 보기
                     return;
 
             }
+            appController.start();
         }
     }
 
     //기능
     //수정
-    private void modify() {
+    public void modify() {
         while (true) {
-            modifyChoiceScreen();
-            int selection = inputInteger(">>> ");
-
-            int postNumber;
-            switch (selection) {
-                case 1:
-                    postNumber = inputInteger("수정할 게시글 번호를 입력해주세요: ");
-                    if (postNums.contains(postNumber)) {
-                        String newTitle = inputString("새로운 제목을 입력해주세요.");
+            System.out.println("수정할 게시글 번호를 입력해주세요.");
+            int postNumber = inputInteger(">>> ");
+            if (postNums.contains(postNumber)) {
+                modifyChoiceScreen();
+                int selection = inputInteger(">>> ");
+                switch (selection) {
+                    case 1: //제목 수정
+                        System.out.println("새로운 제목을 입력해주세요.");
+                        String newTitle = inputString(">>> ");
                         postRepository.changeTitle(postNumber, newTitle);
-                    } else {
-                        System.out.println("내 게시글 목록중에서만 수정할 수 있습니다.");
-                    }
-
-                    break;
-                case 2:
-                    postNumber = inputInteger("수정할 게시글 번호를 입력해주세요: ");
-                    if (postNums.contains(postNumber)) {
+                        break;
+                    case 2: //본문 수정
                         System.out.println("새로운 본문을 입력해주세요.");
                         String newText = inputString(">>> ");
-                    } else {
-                        System.out.println("내 게시글 목록중에서만 수정할 수 있습니다.");
-                    }
-                    break;
-                case 3:
-                    return;
-                default:
-                    System.out.println("잘 못 입력하셨습니다.");
-                    return;
+                        postRepository.changeText(postNumber, newText);
+                        break;
+                    case 3:
+                        return;
+                    default:
+                        System.out.println("잘 못 입력하셨습니다.");
+                        return;
+                }
+            } else {
+                System.out.println("내 게시글 목록중에서만 수정할 수 있습니다.");
+                continue;
             }
             postRepository.readMore(postRepository.searchSpecificPost(postNumber));
+            break;
+
         }
 
     }
 
     //삭제
-    private void delete() {
+    public void delete() {
         while (true) {
             System.out.println("삭제할 게시글 번호를 입력해주세요.");
             int postNumber = inputInteger(">>> ");
-
-            if (postRepository.searchSpecificPost(postNumber) == null) {
-                System.out.println("해당 게시글은 존재하지 않습니다.");
-                continue;
-            }
             if (postNums.contains(postNumber)) {
                 postRepository.removePost(postNumber);
                 System.out.println("게시글이 정상적으로 삭제되었습니다.");
+            } else {
+                System.out.println("내 게시글 목록중에서만 삭제할 수 있습니다.");
+                continue;
             }
+            break;
         }
     }
 
