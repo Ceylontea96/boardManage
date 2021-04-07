@@ -46,7 +46,7 @@ public class MyComment implements AppController { // 내 댓글
                     delete();
                     break;
                 case 3: // 자세히 보기
-
+                    movePost();
                     break;
                 case 4: // 돌아가기
                     return;
@@ -56,7 +56,25 @@ public class MyComment implements AppController { // 내 댓글
         }//while 종료
     }
 
+
     //기능
+    private void movePost() {
+        while (true){
+            CommentRepository commentRepository = new MemoryCommentRepository();
+            System.out.println("자세히 볼 댓글 번호를 입력해주세요.");
+            int commentNum = inputInteger(">>> ");
+            if(commentNum == 0) {
+                System.out.println("자세히 보기를 종료합니다");
+                break;
+            }
+            Comment targetComment = commentRepository.findCommentByCommentNum(commentNum);
+            ReadMore.readMore(targetComment.getcMainPostNum());
+            break;
+
+
+        }//while 종료
+    }
+
     public void modify() {
         while (true) {
             System.out.println("수정할 댓글 번호를 입력해주세요.");
@@ -74,7 +92,7 @@ public class MyComment implements AppController { // 내 댓글
                 }
                 commentRepository.changeComment(commentNum, newComment);
                 System.out.println("댓글 수정 완료!");
-                break;
+                return;
             } else {
                 System.out.println("내 댓글 목록중에서만 수정할 수 있습니다.");
             }

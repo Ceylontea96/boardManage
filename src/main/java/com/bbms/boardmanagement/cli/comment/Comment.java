@@ -1,5 +1,6 @@
 package com.bbms.boardmanagement.cli.comment;
 
+import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 
@@ -18,6 +19,7 @@ public class Comment {
     private boolean isChange;           //수정 여부
     private String cAuthor;             //댓글 작성자
     private String cAuthorCode;         //댓글 작성자 유저코드
+    private int cMainPostNum;           //댓글의 본문번호
 
     private static int cSquence;
 
@@ -27,7 +29,7 @@ public class Comment {
         this.commentText = commentText;
         this.cAuthor = user.getNickName();
         this.cAuthorCode = user.getUserCode();
-
+        this.cMainPostNum = MemoryPostRepository.getCurrentSession().getPostNow().getPostNumber();
     }
 
     @Override
@@ -109,5 +111,12 @@ public class Comment {
 
     public void setcAuthorCode(String cAuthorCode) {
         this.cAuthorCode = cAuthorCode;
+    }
+    public int getcMainPostNum() {
+        return cMainPostNum;
+    }
+
+    public void setcMainPostNum(int cMainPost) {
+        this.cMainPostNum = cMainPost;
     }
 }

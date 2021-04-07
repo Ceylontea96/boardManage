@@ -28,13 +28,13 @@ public class MemoryCommentRepository implements CommentRepository {
         User user1 = new User("isec5", "isec123", "아이섹5", 1975, 05, 27, "남자", "안녕하세요2");
         User user2 = new User("isec10", "isec123", "아이섹10", 2001, 07, 03, "남자", "안녕하세요3");
 
-       Comment comment1 = new Comment("무플", user);
-       Comment comment2 = new Comment("아무내용", user1);
-       Comment comment3 = new Comment("아무런 내용도 없음", user2);
+        Comment comment1 = new Comment("무플", user);
+        Comment comment2 = new Comment("아무내용", user1);
+        Comment comment3 = new Comment("아무런 내용도 없음", user2);
 
-       commentMemoryDB.put(comment1.getCommentNumber(), comment1);
-       commentMemoryDB.put(comment2.getCommentNumber(), comment2);
-       commentMemoryDB.put(comment3.getCommentNumber(), comment3);
+        commentMemoryDB.put(comment1.getCommentNumber(), comment1);
+        commentMemoryDB.put(comment2.getCommentNumber(), comment2);
+        commentMemoryDB.put(comment3.getCommentNumber(), comment3);
 
     }
 
@@ -61,7 +61,7 @@ public class MemoryCommentRepository implements CommentRepository {
         Post postNow = MemoryPostRepository.getCurrentSession().getPostNow();
 
         List<Integer> commentList = postNow.findCommentNumber();
-        int targetNumber = commentList.get(commentNumber-1);
+        int targetNumber = commentList.get(commentNumber - 1);
         postNow.delComment(targetNumber);
 
     }
@@ -71,8 +71,8 @@ public class MemoryCommentRepository implements CommentRepository {
         Post postNow = MemoryPostRepository.getCurrentSession().getPostNow();
 
         List<Integer> commentList = postNow.findCommentNumber();
-        int targetNumber = commentList.get(commentNumber-1);
-       return targetNumber;
+        int targetNumber = commentList.get(commentNumber - 1);
+        return targetNumber;
     }
 
     @Override
@@ -83,12 +83,23 @@ public class MemoryCommentRepository implements CommentRepository {
     @Override
     public void changeComment(int commentNumber, String newText) {
         for (int key : commentMemoryDB.keySet()) {
-            if(commentNumber == key) {
+            if (commentNumber == key) {
                 Comment comment = commentMemoryDB.get(key);
                 comment.setChange(true);
                 comment.setCommentText(newText);
 
             }
         }
+    }
+
+    @Override
+    public Comment findCommentByCommentNum(int commentNumber) {
+        Comment comment = null;
+        for (int key : commentMemoryDB.keySet()) {
+            if (commentNumber == key) {
+                comment = commentMemoryDB.get(key);
+            }
+        }
+        return comment;
     }
 }

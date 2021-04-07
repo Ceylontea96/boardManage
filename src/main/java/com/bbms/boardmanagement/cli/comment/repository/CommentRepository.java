@@ -20,4 +20,6 @@ public interface CommentRepository {
     //댓글 특정하기
     int findComment(int commentNumber);
 
+    Comment findCommentByCommentNum(int commentNumber);
+
 }
