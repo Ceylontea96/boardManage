@@ -40,10 +40,10 @@ public class MyComment implements AppController { // 내 댓글
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1: // 수정
-                    //댓글 수정 기능
+                    modify();
                     break;
                 case 2: // 삭제
-                    //댓글 삭제 기능
+                    delete();
                     break;
                 case 3: // 자세히 보기
 

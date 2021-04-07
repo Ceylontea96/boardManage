@@ -48,7 +48,7 @@ public class ReadMore {
                         return;
                     } else {
                         System.out.println("작성자 본인만 수정할 수 있습니다.");
-                    }
+                    } continue;
                 case 3: // 추천
                     postNow.recommend++;
                     System.out.println("추천되었습니다.");
