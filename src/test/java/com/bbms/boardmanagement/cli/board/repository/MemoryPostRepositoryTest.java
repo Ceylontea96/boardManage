@@ -3,6 +3,7 @@ package com.bbms.boardmanagement.cli.board.repository;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.comment.Comment;
+import com.bbms.boardmanagement.cli.user.domain.Rank;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,9 +20,9 @@ class MemoryPostRepositoryTest {
     @DisplayName("게시글을 저장요청하면 메모리DB에 잘 저장되어야 한다.")
     void insertTest() {
         User user = new User("1", "1", "2", 1111, 11, 11, "남자", "꺼져");
-        Comment comment0 = new Comment("아무내용 없음", "글쓴이123");
-        Comment comment1 = new Comment("테스트용 댓글이다 이말이야~", "글쓴이333");
-        Post post1 = new Post("제목1", "글쓴이1", "내용없음1","");
+        Comment comment0 = new Comment("아무내용 없음", user);
+        Comment comment1 = new Comment("테스트용 댓글이다 이말이야~", user);
+        Post post1 = new Post("제목1", "글쓴이1", "내용없음1","", Rank.BRANCH);
         post1.addComment(comment0);
         post1.addComment(comment1);
         repository.posting(post1, user);

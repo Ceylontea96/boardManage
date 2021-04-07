@@ -1,9 +1,13 @@
 package com.bbms.boardmanagement.cli.comment;
 
+import com.bbms.boardmanagement.cli.user.domain.User;
+import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Comment {
+
 
     LocalDateTime dateTimeNow = LocalDateTime.now();
 
@@ -13,20 +17,22 @@ public class Comment {
     private LocalDateTime changeTime;   //수정된 시간
     private boolean isChange;           //수정 여부
     private String cAuthor;             //댓글 작성자
+    private String cAuthorCode;         //댓글 작성자 유저코드
 
     private static int cSquence;
 
-    public Comment(String commentText, String cAuthor) {
+    public Comment(String commentText, User user) {
         this.commentTime = dateTimeNow;
         this.commentNumber = ++cSquence;
         this.commentText = commentText;
-        this.cAuthor = cAuthor;
+        this.cAuthor = user.getNickName();
+        this.cAuthorCode = user.getUserCode();
 
     }
 
     @Override
     public String toString() {
-        return String.format("%d    %s    %s      %s", commentNumber,cAuthor, commentText, commentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        return String.format("%s    %s      %s", cAuthor, commentText, commentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
 

@@ -1,7 +1,8 @@
-package com.bbms.boardmanagement.cli.board.domain.controller.posting;
+package com.bbms.boardmanagement.cli.board.domain.controller;
 
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.main.AppController;
+import com.bbms.boardmanagement.cli.user.domain.Rank;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
 import com.bbms.boardmanagement.cli.board.repository.PostRepository;
@@ -20,10 +21,11 @@ public class Posting implements AppController {
         String author = userNow.getNickName();
         String mainText = inputString("# 본문: ");
         String authorCode = userNow.getUserCode();
+        Rank userRank = userNow.getUserRank();
 
 
         //저장할 게시글 객체화
-        Post post = new Post(title, author, mainText,authorCode);
+        Post post = new Post(title, author, mainText, authorCode, userRank);
         //저장소에 저장
         postRepository.posting(post, userNow);
         System.out.printf("\n### [%s] 게시글이 정상 추가되었습니다.\n", post.getTitle());

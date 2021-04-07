@@ -51,7 +51,8 @@ public class MyPost implements AppController { //내 글 보기
                     break;
                 case 3: // 자세히 보기
                     appController = new PostDetail();
-                    break;
+                    appController.start();
+                    continue;
                 case 4: // 돌아가기
                     return;
                 default:
@@ -59,7 +60,7 @@ public class MyPost implements AppController { //내 글 보기
                     return;
 
             }
-            appController.start();
+
         }
     }
 

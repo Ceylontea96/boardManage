@@ -40,6 +40,7 @@ public class MemoryUserRepository implements UserRepository {
     @Override
     public void join(User user) {
         userMemoryDB.put(user.getUserCode(), user);
+
     }
 
     @Override
@@ -182,6 +183,7 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public User deleteUser(User user) {
+        User.setUserCount(User.getUserCount() - 1);
         return userMemoryDB.remove(user.getUserCode());
     }
 

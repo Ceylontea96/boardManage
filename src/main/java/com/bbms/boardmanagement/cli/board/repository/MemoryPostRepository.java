@@ -1,9 +1,11 @@
 package com.bbms.boardmanagement.cli.board.repository;
 
+import com.bbms.boardmanagement.cli.Session;
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.SystemMessage;
 import com.bbms.boardmanagement.cli.comment.Comment;
+import com.bbms.boardmanagement.cli.user.domain.Rank;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 import com.bbms.boardmanagement.cli.user.repository.UserRepository;
@@ -22,6 +24,9 @@ public class MemoryPostRepository implements PostRepository {
 
 
     private final static Map<Integer, Post> postMemoryDB = new HashMap<>(); //Map을 이용해서 작성
+    private static Session currentSession = new Session();
+
+
 
     static {
         insertTestData();
@@ -29,10 +34,10 @@ public class MemoryPostRepository implements PostRepository {
 
     private static void insertTestData() {
 
-        Post post1 = new Post("제목1", "글쓴이1", "아무내용없음1", "");
-        Post post2 = new Post("제목2", "글쓴이2", "아무내용없음2", "");
-        Post post3 = new Post("제목3", "글쓴이3", "아무내용없음3", "");
-        Post post4 = new Post("제목4", "글쓴이4", "제목이랑아무내용없음4", "");
+        Post post1 = new Post("제목1", "글쓴이1", "아무내용없음1", "", Rank.BRANCH);
+        Post post2 = new Post("제목2", "글쓴이2", "아무내용없음2", "", Rank.BRANCH);
+        Post post3 = new Post("제목3", "글쓴이3", "아무내용없음3", "", Rank.BRANCH);
+        Post post4 = new Post("제목4", "글쓴이4", "제목이랑아무내용없음4", "", Rank.BRANCH);
 
         postMemoryDB.put(post1.getPostNumber(), post1);
         postMemoryDB.put(post2.getPostNumber(), post2);
@@ -41,11 +46,17 @@ public class MemoryPostRepository implements PostRepository {
 
     }
 
+    public static Session getCurrentSession() {
+        return currentSession;
+    }
+
     @Override
     public void posting(Post post, User user) {        //게시글 추가
 
         postMemoryDB.put(post.getPostNumber(), post);
+
         user.addMyPost(post);
+
     }
 
     @Override
@@ -142,14 +153,16 @@ public class MemoryPostRepository implements PostRepository {
 
     @Override
     public void readMore(Post post) {
+        post.setView(post.getView() + 1); //조회수 +1
         System.out.println("================================================================================");
-        System.out.println("제목: " + post.getTitle());
+        System.out.println("제목: " + post.getTitle());// + "[" +post.getThisComment().size()+ "]"
         System.out.println("작성자: " + post.getAuthor());
-        System.out.println("회원등급: " +post.getUserRank());
+        System.out.println("회원등급: " +post.getUserRank() + "         조회: " + post.getView());
         System.out.println("작성시간: " + post.getReportingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         System.out.println(post.getMainText());
-        System.out.println("댓글");
+        System.out.println("추천: " + post.getRecommend());
         System.out.println("---------------------------------------");
+        System.out.println("댓글");
         for (int key : post.getThisComment().keySet()) {
             Comment comment = post.getThisComment().get(key);
             System.out.println(comment);

@@ -1,6 +1,7 @@
 package com.bbms.boardmanagement.cli.board.domain;
 
 import com.bbms.boardmanagement.cli.comment.Comment;
+import com.bbms.boardmanagement.cli.user.domain.Rank;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public class Post {
     private int postNumber;                                 //게시글 번호
     private String title;                                   //게시글 제목
     private String author;                                  //게시글 작성자 이름
-    private String userRank;                                //게시글 작성회원 등급(Member에서 가져오기)
+    private Rank userRank;                                //게시글 작성회원 등급(Member에서 가져오기)
     private LocalDateTime reportingDate;                    //게시글 작성시간
     private String mainText;                                //게시글 본문
     private int view;                                       //게시글 조회수
@@ -38,23 +39,24 @@ public class Post {
     //생성자
 
 
-    public Post(String title, String author, String mainText, String authorCode) {
+    public Post(String title, String author, String mainText, String authorCode, Rank authorRank) {
         this.postNumber = ++sequence;
         this.title = title;
         this.author = author;
-        this.userRank = "일반회원";
+        this.userRank = authorRank;
         this.reportingDate = dateTimeNow;
         this.mainText = mainText;
         this.authorCode = authorCode;
-
     }
 
     //내 댓글 목록에 추가 기능
     public void addComment(Comment comment) {
         thisComment.put(comment.getCommentNumber(), comment);
+        commentCount++;
     }
     //내 댓글 목록에서 삭제 기능
     public Comment delComment(int commentNumber) {
+        commentCount--;
         return thisComment.remove(commentNumber);
     }
 
@@ -103,11 +105,11 @@ public class Post {
         this.author = author;
     }
 
-    public String getUserRank() {
+    public Rank getUserRank() {
         return userRank;
     }
 
-    public void setUserRank(String userRank) {
+    public void setUserRank(Rank userRank) {
         this.userRank = userRank;
     }
 

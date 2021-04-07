@@ -47,6 +47,8 @@ public class PostSearch implements AppController {
             if (results.size() == 0) {
                 System.out.println("검색결과가 없습니다.");
                 continue;
+            } else {
+                postRepository.showList(results);
             }
             allDocumentIndexSearchScreen();
             int selection = inputInteger(">>> ");
@@ -56,6 +58,9 @@ public class PostSearch implements AppController {
                     int postNum = inputInteger(">>> ");
                     if (postRepository.integrity(results).contains(postNum)) {
                         ReadMore.readMore(postNum);
+                        return;
+                    } else {
+                        System.out.println("검색한 게시글 목록중에서 선택해주세요.");
                     }
                     break;
                 case 2: // 돌아가기

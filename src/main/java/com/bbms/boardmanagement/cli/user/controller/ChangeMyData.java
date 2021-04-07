@@ -15,8 +15,8 @@ public class ChangeMyData implements AppController { // 내 정보 변경
     @Override
     public void start() {
         User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
-        myInformationChangeScreen(); // 내 정보 변경 메뉴
         while (true) {
+        myInformationChangeScreen(); // 내 정보 변경 메뉴
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1: // 닉네임 변경
@@ -32,7 +32,7 @@ public class ChangeMyData implements AppController { // 내 정보 변경
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    return;
+                    continue;
             }
         }//while 종료
     }

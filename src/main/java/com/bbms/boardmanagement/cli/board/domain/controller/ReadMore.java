@@ -12,6 +12,7 @@ import com.bbms.boardmanagement.cli.main.AppController;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 
+import static com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository.*;
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 
 public class ReadMore {
@@ -21,8 +22,11 @@ public class ReadMore {
 
         while (true) {
             PostRepository postRepository = new MemoryPostRepository();
-            User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
-            Post postNow = postRepository.searchSpecificPost(postNum);
+            User userNow = MemoryUserRepository.getCurrentSession().getUserNow(); //현재 사용자 정보 가져오기
+            Post post = postRepository.searchSpecificPost(postNum);
+            getCurrentSession().setPostNow(post);
+            Post postNow = getCurrentSession().getPostNow();
+
             postRepository.readMore(postNow);
 
 
@@ -52,6 +56,7 @@ public class ReadMore {
                     comment(postNow, userNow);
                     break;
                 case 5: // 돌아가기
+                    getCurrentSession().setPostNow(null);
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
@@ -110,12 +115,12 @@ public class ReadMore {
     private static void comment(Post post, User user) {
         CommentRepository commentRepository = new MemoryCommentRepository();
         System.out.println("댓글 내용을 입력하세요.");
-        String ment = inputString(">>> ");
-        Comment comment = new Comment(ment, user.getUserCode());
+        String reply = inputString(">>> ");
+        Comment comment = new Comment(reply, user);
+
         commentRepository.addComment(comment, user);
         System.out.println("댓글이 추가되었습니다.");
     }
-
 
 
 }
