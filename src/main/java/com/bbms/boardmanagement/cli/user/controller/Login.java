@@ -18,6 +18,33 @@ public class Login implements AppController {
 
     @Override
     public void start() {
+
+        login();
+
+        while (true) {
+        boardMainScreen();
+            int selection = inputInteger(">>> ");
+            switch (selection) { // 로그인이 된 다음 보여주는 스위치
+                case 1: // 내 정보
+                    appController = new UserMyInfo();
+                    break;
+                case 2: // 글 목록
+                    appController = new PostList();
+                    break;
+                case 3: // 로그아웃
+                    MemoryUserRepository.getCurrentSession().setUserNow(null);
+                    return;
+                default:
+                    System.out.println("잘못된 번호를 입력하셨습니다.");
+                    return;
+            }
+            appController.start();
+        }
+    }
+
+    //기능
+    //로그인
+    private void login() {
         while (true) {
             System.out.println("아이디를 입력해주세요.");
             String id = inputString(">>> ");
@@ -42,24 +69,5 @@ public class Login implements AppController {
                 continue;
             }
         }//while 종료
-        while (true) {
-        boardMainScreen();
-            int selection = inputInteger(">>> ");
-            switch (selection) { // 로그인이 된 다음 보여주는 스위치
-                case 1: // 내 정보
-                    appController = new UserMyInfo();
-                    break;
-                case 2: // 글 목록
-                    appController = new PostList();
-                    break;
-                case 3: // 로그아웃
-                    MemoryUserRepository.getCurrentSession().setUserNow(null);
-                    return;
-                default:
-                    System.out.println("잘못된 번호를 입력하셨습니다.");
-                    return;
-            }
-            appController.start();
-        }
     }
 }

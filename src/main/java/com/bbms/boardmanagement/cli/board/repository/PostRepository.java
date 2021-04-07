@@ -20,6 +20,9 @@ public interface PostRepository {
 
     void changeText(int postNumber, String mainText);
 
+    //게시글 목록 출력
+    void showList(List<Post> searchList);
+
     //특정 게시글 찾기
     Post searchSpecificPost(int postNumber);
 

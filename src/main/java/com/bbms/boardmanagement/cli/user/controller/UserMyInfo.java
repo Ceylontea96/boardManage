@@ -18,7 +18,7 @@ public class UserMyInfo implements AppController { // 내 정보 보여주기
 
     @Override
     public void start() {
-        userRepository.myInfo(getCurrentSession().getUserNow());
+        userRepository.myInfo(getCurrentSession().getUserNow());//내정보 출력
         while (true) {
         myInformationScreen(); // 내 정보 메뉴
             int selection = inputInteger(">>> ");

@@ -1,6 +1,7 @@
 package com.bbms.boardmanagement.cli.board.domain.controller;
 
 import com.bbms.boardmanagement.cli.board.domain.Post;
+import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.controller.changePost.ChangePost;
 import com.bbms.boardmanagement.cli.board.domain.controller.posting.Posting;
 import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
@@ -13,15 +14,18 @@ import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 import javax.xml.soap.Detail;
 
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
+import static com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository.*;
 
 public class PostList implements AppController { // 글 목록 보여주기
 
     private static AppController appController;
     PostRepository postRepository = new MemoryPostRepository();
 
+
     @Override
     public void start() {
         while (true) {
+            postRepository.showList(postRepository.searchPostList("", SearchCondition.ALL));
         allDocumentIndexScreen();
             int selection = inputInteger(">>> ");
             switch (selection) {
@@ -32,8 +36,10 @@ public class PostList implements AppController { // 글 목록 보여주기
                     appController = new PostSearch();
                     break;
                 case 3: // 새 글쓰기
-                    insertPost(MemoryUserRepository.getCurrentSession().getUserNow());
-                    break;
+                    User userNow = getCurrentSession().getUserNow();
+                    insertPost(userNow);
+                    continue;
+//                    break;
                 case 4: //돌아가기
                     return;
                 default:

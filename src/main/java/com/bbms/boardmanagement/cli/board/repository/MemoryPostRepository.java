@@ -92,12 +92,13 @@ public class MemoryPostRepository implements PostRepository {
         return postList;
     }
 
-    @Override // 글 수정
+    @Override // 제목 수정
     public void changeTitle(int postNumber,String title) {
         Post post = searchSpecificPost(postNumber);
         post.setTitle(title);
     }
 
+    @Override // 본문 수정
     public void changeText(int postNumber,String mainText) {
         Post post = searchSpecificPost(postNumber);
         post.setMainText(mainText);
@@ -112,6 +113,19 @@ public class MemoryPostRepository implements PostRepository {
             }
         }
         return post;
+    }
+
+    @Override
+    public void showList(List<Post> searchList) {
+        if (searchList.size() == 0) {
+            System.out.println("---------------------------------- 게시글 없음 --------------------------------------");
+        }
+        System.out.println("========================================== 글 목록 =======================================\n");
+        System.out.println("번호            제목            작성자             작성일          조회    추천");
+        for (Post post : searchList) {
+            System.out.println(post);
+        }
+        System.out.println("==========================================================================================");
     }
 
     @Override
