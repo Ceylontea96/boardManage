@@ -28,7 +28,6 @@ public class PostList implements AppController { // 글 목록 보여주기
                     System.out.println("게시글 번호를 입력해주세요.");
                     int postNum = inputInteger(">>> ");
                     ReadMore.readMore(postNum);
-
                     break;
                 case 2: //글 검색
                     appController = new PostSearch();
@@ -43,7 +42,6 @@ public class PostList implements AppController { // 글 목록 보여주기
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    continue;
             }
 
         }//while 종료
@@ -53,15 +51,23 @@ public class PostList implements AppController { // 글 목록 보여주기
     private void insertPost(User userNow) {
         System.out.println("\n====== 새로운 게시글을 추가합니다. ======");
         String title = inputString("# 제목: ");
-        String author = userNow.getNickName();
-        String mainText = inputString("# 본문: ");
-        String authorCode = userNow.getUserCode();
-        Rank userRank = userNow.getUserRank();
+        if (title.equals("0")) {
+            System.out.println("게시글 추가를 종료합니다.");
+        } else {
+            String author = userNow.getNickName();
+            String mainText = inputString("# 본문: ");
+            if (mainText.equals("0")){
+                System.out.println("게시글 추가를 종료합니다.");
+            }else {
+                String authorCode = userNow.getUserCode();
+                Rank userRank = userNow.getUserRank();
 
-        //저장할 게시글 객체화
-        Post post = new Post(title, author, mainText, authorCode, userRank);
-        //저장소에 저장
-        postRepository.posting(post, userNow);
-        System.out.printf("\n### [%s] 게시글이 정상 추가되었습니다.\n", post.getTitle());
+                //저장할 게시글 객체화
+                Post post = new Post(title, author, mainText, authorCode, userRank);
+                //저장소에 저장
+                postRepository.posting(post, userNow);
+                System.out.printf("\n### [%s] 게시글이 정상 추가되었습니다.\n", post.getTitle());
+            }
+        }
     }
 }

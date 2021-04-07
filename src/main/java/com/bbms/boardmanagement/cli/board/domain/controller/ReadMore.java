@@ -62,7 +62,6 @@ public class ReadMore {
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    return;
             }
         }
 
@@ -82,19 +81,24 @@ public class ReadMore {
                 case 1: //제목 수정
                     System.out.println("새로운 제목을 입력해주세요.");
                     String newTitle = inputString(">>> ");
+                    if(newTitle.equals("0")){
+                        break;
+                    }
                     postRepository.changeTitle(post.getPostNumber(), newTitle);
 
                     break;
                 case 2: //본문 수정
                     System.out.println("새로운 본문을 입력해주세요.");
                     String newText = inputString(">>> ");
+                    if(newText.equals("0")){
+                        break;
+                    }
                     postRepository.changeText(post.getPostNumber(), newText);
                     break;
                 case 3:
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    return;
             }
         } else {
             System.out.println("작성자 본인만 수정할 수 있습니다.");
@@ -118,10 +122,14 @@ public class ReadMore {
         CommentRepository commentRepository = new MemoryCommentRepository();
         System.out.println("댓글 내용을 입력하세요.");
         String reply = inputString(">>> ");
-        Comment comment = new Comment(reply, user);
+        if (reply.equals("0")) {
+            System.out.println("댓글 내용 입력을 중단합니다.");
+        } else {
+            Comment comment = new Comment(reply, user);
 
-        commentRepository.addComment(comment, user);
-        System.out.println("댓글이 추가되었습니다.");
+            commentRepository.addComment(comment, user);
+            System.out.println("댓글이 추가되었습니다.");
+        }
     }
 
 

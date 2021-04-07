@@ -27,34 +27,57 @@ public class AddUser implements AppController {
         while (true) {
             System.out.println("아이디를 입력해주세요.");
             String id = inputString(">>> ");
+            if(id.equals("0")){
+                break;
+            }
             boolean idOk = userRepository.isOverlap(id, CheckCondition.ID);
             if (!idOk) {
                 while (true) {
                     System.out.println("비밀번호를 입력해주세요.");
                     String pw = inputString(">>> ");
+                    if(pw.equals("0")){
+                        break;
+                    }
                     System.out.println("비밀번호를 확인하겠습니다. 비밀번호를 다시 입력해주세요.");
                     String pw2 = inputString(">>> ");
                     if (pw.equals(pw2)) {
                         while (true) {
                             System.out.println("닉네임을 입력해주세요.");
                             String nickName = inputString(">>> ");
+                            if(nickName.equals("0")){
+                                break;
+                            }
                             boolean nickOk = userRepository.isOverlap(nickName, CheckCondition.NICKNAME);
                             if (!nickOk) {
                                 while (true) {
                                     System.out.println("출생년도를 입력해주세요.");
                                     int birthYear = inputInteger(">>> ");
+                                    if(birthYear == 0){
+                                        break;
+                                    }
                                     System.out.println("출생월을 입력해주세요.");
                                     int birthMonth = inputInteger(">>> ");
+                                    if(birthMonth == 0){
+                                        break;
+                                    }
                                     System.out.println("출생일을 입력해주세요.");
                                     int birthDay = inputInteger(">>> ");
+                                    if(birthDay == 0){
+                                        break;
+                                    }
                                     if (LocalDate.now().getYear() >= birthYear && birthYear > 0) {
                                         if(birthMonth <= 12 && birthMonth > 0) {
                                             if (birthDay <= 31 && birthDay > 0) {
                                                 System.out.println("성별을 입력해주세요.");
                                                 String gender = inputString(">>> ");
+                                                if(gender.equals("0")){
+                                                    break;
+                                                }
                                                 System.out.println("자기소개를 입력해주세요.");
                                                 String intro = inputString(">>> ");
-
+                                                if(intro.equals("0")){
+                                                    break;
+                                                }
                                                 User user = new User(id, pw, nickName, birthYear, birthMonth, birthDay, gender, intro);
                                                 userRepository.join(user);
 

@@ -59,7 +59,9 @@ public class PostSearch implements AppController {
                     if (postRepository.integrity(results).contains(postNum)) {
                         ReadMore.readMore(postNum);
                         return;
-                    } else {
+                    } else if(postNum == 0){
+                        System.out.println("게시글 자세히보기를 종료합니다");
+                    }else {
                         System.out.println("검색한 게시글 목록중에서 선택해주세요.");
                     }
                     break;
@@ -67,7 +69,6 @@ public class PostSearch implements AppController {
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    continue;
             }
         }//while 종료
     }

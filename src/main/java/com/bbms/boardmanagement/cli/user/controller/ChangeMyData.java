@@ -16,7 +16,7 @@ public class ChangeMyData implements AppController { // 내 정보 변경
     public void start() {
         User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
         while (true) {
-        myInformationChangeScreen(); // 내 정보 변경 메뉴
+            myInformationChangeScreen(); // 내 정보 변경 메뉴
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1: // 닉네임 변경
@@ -32,7 +32,6 @@ public class ChangeMyData implements AppController { // 내 정보 변경
                     return;
                 default:
                     System.out.println("잘 못 입력하셨습니다.");
-                    continue;
             }
         }//while 종료
     }
@@ -43,33 +42,44 @@ public class ChangeMyData implements AppController { // 내 정보 변경
         System.out.println("닉네임을 변경합니다.");
         System.out.println("새로운 닉네임을 입력해주세요.");
         String newNick = inputString(">>> ");
+
         if (userRepository.isOverlap(newNick, CheckCondition.NICKNAME)) {
             //닉네임 중복이면
             System.out.println("이미 존재하는 닉네임입니다.");
-        } else {
+        }else if(newNick.equals("0")){
+            System.out.println("닉네임 변경을 취소합니다");
+        }else {
             user.setNickName(newNick);
             System.out.println("닉네임 변경이 완료되었씁니다.");
         }
     }
 
-    //비밀번호 변경
-    private void changePw(User user) {
-        System.out.println("비밀번호를 변경합니다.");
-        System.out.println("새로운 비밀번호를 입력해주세요.");
-        String newPw1 = inputString(">>> ");
-        System.out.println("비밀번호 확인을 위해 다시 한 번 입력해주세요.");
-        String newPw2 = inputString(">>> ");
-        if(newPw1.equals(newPw2)) {
-            user.setPassword(newPw1);
-        } else {
-            System.out.println("비밀번호가 다릅니다.");
+        //비밀번호 변경
+        private void changePw (User user) {
+            System.out.println("비밀번호를 변경합니다.");
+            System.out.println("새로운 비밀번호를 입력해주세요.");
+            String newPw1 = inputString(">>> ");
+            if (newPw1.equals("0")) {
+                System.out.println("비밀번호 변경을 취소합니다.");
+            } else {
+                System.out.println("비밀번호 확인을 위해 다시 한 번 입력해주세요.");
+                String newPw2 = inputString(">>> ");
+                if (newPw1.equals(newPw2)) {
+                    user.setPassword(newPw1);
+                } else {
+                    System.out.println("비밀번호가 다릅니다.");
+                }
+            }
+        }
+
+        //내 소개 변경
+        private void changeIntro (User user){
+            System.out.println("새로운 자기소개를 입력해주세요.");
+            String newIntro = inputString(">>> ");
+            if (newIntro.equals("0")){
+                System.out.println("자기소개 변경을 종료합니다");
+            }else {
+                user.setIntroduce(newIntro);
+            }
         }
     }
-
-    //내 소개 변경
-    private void changeIntro(User user) {
-        System.out.println("새로운 자기소개를 입력해주세요.");
-        String newIntro = inputString(">>> ");
-        user.setIntroduce(newIntro);
-    }
-}

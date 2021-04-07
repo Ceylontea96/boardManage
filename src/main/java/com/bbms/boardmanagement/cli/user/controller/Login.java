@@ -46,12 +46,21 @@ public class Login implements AppController {
     //기능
     //로그인
     private void login() {
+
         while (true) {
             System.out.println("아이디를 입력해주세요.");
             String id = inputString(">>> ");
             User user = userRepository.idCheck(id);
+            if(id.equals("0")){
+                System.out.println("로그인을 종료합니다");
+                break;
+            }
             System.out.println("비밀번호를 입력해주세요.");
             String pw = inputString(">>> ");
+            if (pw.equals("0")){
+                System.out.println("로그인을 종료합니다");
+                break;
+            }
             if (user == null) {
                 System.out.println("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
                 continue;
@@ -67,7 +76,6 @@ public class Login implements AppController {
                 break;
             } else {
                 System.out.println("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
-                continue;
             }
         }//while 종료
     }
