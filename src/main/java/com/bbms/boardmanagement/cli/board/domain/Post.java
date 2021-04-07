@@ -6,6 +6,7 @@ import com.bbms.boardmanagement.cli.user.domain.Rank;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,16 @@ public class Post {
     public Comment delComment(int commentNumber) {
         commentCount--;
         return thisComment.remove(commentNumber);
+    }
+
+    public List<Integer> findCommentNumber() {
+        List<Integer> commentList = new ArrayList<>();
+        for (int key : thisComment.keySet()) {
+            Comment comment = thisComment.get(key);
+
+            commentList.add(comment.getCommentNumber());
+        }
+        return commentList;
     }
 
 

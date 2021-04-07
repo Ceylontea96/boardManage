@@ -151,7 +151,7 @@ public class MemoryUserRepository implements UserRepository {
     public void myComment(User user) {
         for (int key : user.getMyComment().keySet()) {
             Comment comment = user.getMyComment().get(key);
-            System.out.println(comment);
+            System.out.println(comment.getCommentNumber() + "\t" +comment);
         }
     }
 

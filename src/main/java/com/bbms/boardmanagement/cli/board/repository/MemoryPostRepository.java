@@ -163,10 +163,13 @@ public class MemoryPostRepository implements PostRepository {
         System.out.println("추천: " + post.getRecommend());
         System.out.println("---------------------------------------");
         System.out.println("댓글");
+        int i = 1;
         for (int key : post.getThisComment().keySet()) {
             Comment comment = post.getThisComment().get(key);
-            System.out.println(comment);
+            System.out.println(i + "\t" + comment);
+            i++;
         }
+
         System.out.println("==============================================================================");
     }
 
