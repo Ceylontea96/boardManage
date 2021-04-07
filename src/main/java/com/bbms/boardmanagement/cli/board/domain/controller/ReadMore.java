@@ -18,14 +18,16 @@ import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 public class ReadMore {
 
     public static void readMore(int postNum) {
+            PostRepository postRepository = new MemoryPostRepository(); // 게시글 DB 참조
+            User userNow = MemoryUserRepository.getCurrentSession().getUserNow(); //현재 사용자 정보 가져오기
+            Post post = postRepository.searchSpecificPost(postNum); // 입력받은 게시글 번호를 이용해서 게시글을 특정
+            getCurrentSession().setPostNow(post);   // 현재 게시글에 대한 정보를 세션에 전달
+            Post postNow = getCurrentSession().getPostNow();
+            postNow.setView(postNow.getView() + 1); //readMore가 최초 호출될 때 조회수 + 1
+
 
 
         while (true) {
-            PostRepository postRepository = new MemoryPostRepository();
-            User userNow = MemoryUserRepository.getCurrentSession().getUserNow(); //현재 사용자 정보 가져오기
-            Post post = postRepository.searchSpecificPost(postNum);
-            getCurrentSession().setPostNow(post);
-            Post postNow = getCurrentSession().getPostNow();
 
             postRepository.readMore(postNow);
 

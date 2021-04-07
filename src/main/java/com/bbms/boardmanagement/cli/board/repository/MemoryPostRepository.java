@@ -153,7 +153,7 @@ public class MemoryPostRepository implements PostRepository {
 
     @Override
     public void readMore(Post post) {
-        post.setView(post.getView() + 1); //조회수 +1
+//        post.setView(post.getView() + 1); //조회수 +1
         System.out.println("================================================================================");
         System.out.println("제목: " + post.getTitle());// + "[" +post.getThisComment().size()+ "]"
         System.out.println("작성자: " + post.getAuthor());
