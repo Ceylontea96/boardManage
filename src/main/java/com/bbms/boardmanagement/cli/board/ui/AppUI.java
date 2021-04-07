@@ -96,7 +96,8 @@ public abstract class AppUI {
         System.out.println("### 2. 삭제");
         System.out.println("### 3. 추천");
         System.out.println("### 4. 댓글 쓰기");
-        System.out.println("### 5. 돌아가기");
+        System.out.println("### 5. 댓글 수정 / 삭제");
+        System.out.println("### 6. 돌아가기");
         System.out.println("=======================================");
     }
 

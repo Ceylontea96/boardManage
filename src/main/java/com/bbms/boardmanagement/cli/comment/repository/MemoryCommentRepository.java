@@ -64,8 +64,15 @@ public class MemoryCommentRepository implements CommentRepository {
         int targetNumber = commentList.get(commentNumber-1);
         postNow.delComment(targetNumber);
 
+    }
 
+    @Override
+    public int findComment(int commentNumber) {
+        Post postNow = MemoryPostRepository.getCurrentSession().getPostNow();
 
+        List<Integer> commentList = postNow.findCommentNumber();
+        int targetNumber = commentList.get(commentNumber-1);
+       return targetNumber;
     }
 
     @Override
@@ -80,6 +87,7 @@ public class MemoryCommentRepository implements CommentRepository {
                 Comment comment = commentMemoryDB.get(key);
                 comment.setChange(true);
                 comment.setCommentText(newText);
+
             }
         }
     }

@@ -102,4 +102,12 @@ public class Comment {
     public static void setcSquence(int cSquence) {
         Comment.cSquence = cSquence;
     }
+
+    public String getcAuthorCode() {
+        return cAuthorCode;
+    }
+
+    public void setcAuthorCode(String cAuthorCode) {
+        this.cAuthorCode = cAuthorCode;
+    }
 }

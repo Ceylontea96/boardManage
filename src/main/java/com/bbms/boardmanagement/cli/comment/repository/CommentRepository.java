@@ -17,4 +17,7 @@ public interface CommentRepository {
     //댓글 수정
     void changeComment(int commentNumber, String newText);
 
+    //댓글 특정하기
+    int findComment(int commentNumber);
+
 }
