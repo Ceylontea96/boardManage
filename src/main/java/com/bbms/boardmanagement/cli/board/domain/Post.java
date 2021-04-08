@@ -34,7 +34,6 @@ public class Post {
     private Map<Integer, User> recommender = new HashMap<>(); //추천 유저정보
 
 
-
     private Map<Integer, Comment> thisComment = new HashMap<>();  //게시글 댓글 배열로 담기
 
 
@@ -56,9 +55,14 @@ public class Post {
         this.mainText = mainText;
         this.authorCode = authorCode;
     }
+
     //추천인 추가
     public void addRecommender(User user) {
         recommender.put(user.getUserNumber(), user);
+    }
+
+    public void removeRecommender(User user) {
+        recommender.remove(user.getUserNumber(), user);
     }
 
     //내 댓글 목록에 추가 기능

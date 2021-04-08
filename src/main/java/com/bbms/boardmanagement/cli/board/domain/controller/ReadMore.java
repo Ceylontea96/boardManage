@@ -54,7 +54,9 @@ public class ReadMore {
                     continue;
                 case 3: // 추천
                    if(postNow.getRecommender().containsKey(userNow.getUserNumber())) {
-                       System.out.println("이미 추천 하셨습니다.");
+                       postNow.removeRecommender(userNow);
+                       postNow.recommend--;
+                       System.out.println("추천을 취소했습니다.");
                 } else {
                        postNow.addRecommender(userNow);
                        postNow.recommend++;
