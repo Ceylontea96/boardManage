@@ -50,25 +50,27 @@ public class PostSearch implements AppController {
             } else {
                 postRepository.showList(results);
             }
-            allDocumentIndexSearchScreen();
-            int selection = inputInteger(">>> ");
-            switch (selection) {
-                case 1: // 자세히 보기
-                    System.out.println("게시글 번호를 입력해주세요.");
-                    int postNum = inputInteger(">>> ");
-                    if (postRepository.integrity(results).contains(postNum)) {
-                        ReadMore.readMore(postNum);
+            while (true) {
+                allDocumentIndexSearchScreen();
+                int selection = inputInteger(">>> ");
+                switch (selection) {
+                    case 1: // 자세히 보기
+                        System.out.println("게시글 번호를 입력해주세요.");
+                        int postNum = inputInteger(">>> ");
+                        if (postRepository.integrity(results).contains(postNum)) {
+                            ReadMore.readMore(postNum);
+                            return;
+                        } else if (postNum == 0) {
+                            System.out.println("게시글 자세히보기를 종료합니다");
+                        } else {
+                            System.out.println("검색한 게시글 목록중에서 선택해주세요.");
+                        }
+                        break;
+                    case 2: // 돌아가기
                         return;
-                    } else if(postNum == 0){
-                        System.out.println("게시글 자세히보기를 종료합니다");
-                    }else {
-                        System.out.println("검색한 게시글 목록중에서 선택해주세요.");
-                    }
-                    break;
-                case 2: // 돌아가기
-                    return;
-                default:
-                    System.out.println("잘 못 입력하셨습니다.");
+                    default:
+                        System.out.println("잘 못 입력하셨습니다.");
+                }
             }
         }//while 종료
     }
