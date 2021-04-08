@@ -149,9 +149,11 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public void myComment(User user) {
+        int i = 1;
         for (int key : user.getMyComment().keySet()) {
             Comment comment = user.getMyComment().get(key);
-            System.out.println(comment.getCommentNumber() + "\t" +comment);
+            System.out.println(i + "\t" +comment);
+            i++;
         }
     }
 

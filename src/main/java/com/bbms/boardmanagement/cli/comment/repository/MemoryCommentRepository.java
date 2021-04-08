@@ -2,6 +2,7 @@ package com.bbms.boardmanagement.cli.comment.repository;
 
 import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
+import com.bbms.boardmanagement.cli.board.repository.PostRepository;
 import com.bbms.boardmanagement.cli.comment.Comment;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 public class MemoryCommentRepository implements CommentRepository {
 
+    PostRepository postRepository = new MemoryPostRepository();
 
     private final static Map<Integer, Comment> commentMemoryDB = new HashMap<>();
 
@@ -64,6 +66,21 @@ public class MemoryCommentRepository implements CommentRepository {
 //        int targetNumber = commentList.get(commentNumber - 1);
         postNow.delComment(commentNumber);
 
+
+    }
+
+    public void deleteComment2(int commentNumber) {
+
+        //현재 유저의 댓글 목록에서 댓글 지우기
+        MemoryUserRepository.getCurrentSession().getUserNow().delMyComment(commentNumber);
+        //게시글 댓글 목록에서 댓글 지우기
+        Comment comment = findCommentByCommentNum(commentNumber);
+        int targetPostNum = comment.getcMainPostNum();
+        Post targetPost = postRepository.searchSpecificPost(targetPostNum);
+        targetPost.delComment(commentNumber);
+
+        //DB에서 댓글 지우기
+        commentMemoryDB.remove(commentNumber);
     }
 
     @Override

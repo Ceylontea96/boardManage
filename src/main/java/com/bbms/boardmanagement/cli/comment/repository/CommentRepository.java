@@ -11,6 +11,9 @@ public interface CommentRepository {
     //댓글 삭제
     void deleteComment(int commentNumber);
 
+    //댓글 삭제2
+    void deleteComment2(int commentNumber);
+
     //댓글 보기
     void showComments();
 

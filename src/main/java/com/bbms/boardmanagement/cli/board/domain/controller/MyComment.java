@@ -120,7 +120,7 @@ public class MyComment implements AppController { // 내 댓글
                 System.out.println("1. 네,  2. 아니요");
                 int selection = inputInteger(">>> ");
                 if (selection == 1) {
-                    commentRepository.deleteComment(targetCommentNum);
+                    commentRepository.deleteComment2(targetCommentNum);
                     System.out.println("댓글 삭제 완료!");
                 } else {
                     System.out.println("댓글 삭제를 취소했습니다.");
