@@ -60,9 +60,9 @@ public class MemoryCommentRepository implements CommentRepository {
         //현재 게시글의 댓글 목록에서 댓글 지우기
         Post postNow = MemoryPostRepository.getCurrentSession().getPostNow();
 
-        List<Integer> commentList = postNow.findCommentNumber();
-        int targetNumber = commentList.get(commentNumber - 1);
-        postNow.delComment(targetNumber);
+//        List<Integer> commentList = postNow.findCommentNumber();
+//        int targetNumber = commentList.get(commentNumber - 1);
+        postNow.delComment(commentNumber);
 
     }
 

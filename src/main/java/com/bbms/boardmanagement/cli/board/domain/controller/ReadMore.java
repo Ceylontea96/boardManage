@@ -145,83 +145,62 @@ public class ReadMore {
         User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
 
         while (true) {
-
-            System.out.println("1. 수정,  2. 삭제");
-            int selection = inputInteger(">>> ");
-            if (selection == 0) {
+            System.out.println("수정 / 삭제할 댓글 번호를 입력해주세요.");
+            int commentNum = inputInteger(">>> ");
+            if (commentNum == 0) {
                 System.out.println("댓글 수정 / 삭제를 종료합니다.");
                 break;
             }
-            switch (selection) {
-                case 1:
-                    while (true) {
-                        System.out.println("수정할 댓글 번호를 입력해주세요.");
-                        int commentNum = inputInteger(">>> ");
-                        if (commentNum == 0) {
-                            System.out.println("댓글 수정을 종료합니다.");
-                            break;
-                        }
-                        if (commentNum > 0 && commentNum <= postNow.getThisComment().size()) {
-                            List<Integer> targetCommentNums = postNow.findCommentNumber();
-                            int targetCommentNum = targetCommentNums.get(commentNum-1);
-                            if (userNow.getUserCode().equals(postNow.getThisComment().get(targetCommentNum).getcAuthorCode())) {
-                                System.out.println("새로운 댓글 내용을 입력해주세요.");
-                                String newComment = inputString(">>> ");
-                                if (newComment.equals("0")) {
-                                    System.out.println("댓글 수정을 종료합니다.");
-                                    break;
-                                }
-                                commentRepository.changeComment(targetCommentNum, newComment);
-                                System.out.println("댓글 수정 완료!");
-                                break;
-                            } else {
-                                System.out.println("댓글 작성자 본인만 삭제할 수 있습니다.");
-                            }
-                        } else {
-                            System.out.println("선택하신 댓글은 존재하지 않습니다.");
-                        }
-                    }
-                    break;
-                case 2:
-                    while (true) {
-                        System.out.println("삭제할 댓글 번호를 입력해주세요.");
-                        int commentNum = inputInteger(">>> ");
-                        if (commentNum == 0) {
-                            System.out.println("댓글 삭제를 종료합니다.");
-                            break;
-                        }
-                        if (commentNum > 0 && commentNum <= postNow.getThisComment().size()) {
-                            List<Integer> targetCommentNums = postNow.findCommentNumber();
-                            int targetCommentNum = targetCommentNums.get(commentNum-1);
-                            if (userNow.getUserCode().equals(postNow.getThisComment().get(targetCommentNum).getcAuthorCode())) {
+            if (commentNum > 0 && commentNum <= postNow.getThisComment().size()) {
+                List<Integer> targetCommentNums = postNow.findCommentNumber();
+                int targetCommentNum = targetCommentNums.get(commentNum - 1);
+                if (userNow.getUserCode().equals(postNow.getThisComment().get(targetCommentNum).getcAuthorCode())) {
 
-                                System.out.println("정말 삭제하시겠습니까?");
-                                System.out.println("1. 네  2. 아니요");
-                                int selection1 = inputInteger(">>> ");
-                                switch (selection1) {
-                                    case 1:
-                                        commentRepository.deleteComment(targetCommentNum);
-                                        System.out.println("댓글 삭제 완료!");
-                                        break;
-                                    case 2:
-                                        System.out.println("댓글 삭제가 취소되었습니다.");
-                                        break;
-                                    default:
-                                        System.out.println("1번 또는 2번중에서 입력해주세요.");
-                                }
-                            } else {
-                                System.out.println("댓글 작성자 본인만 삭제할 수 있습니다.");
-                            }
-                        } else {
-                            System.out.println("선택하신 댓글은 존재하지 않습니다.");
-                        }
+                    System.out.println("1. 수정,  2. 삭제");
+                    int selection = inputInteger(">>> ");
+                    if (selection == 0) {
+                        System.out.println("댓글 수정 / 삭제를 종료합니다.");
+                        break;
                     }
-                    break;
-                default:
+                    switch (selection) {
+                        case 1:
+                            System.out.println("새로운 댓글 내용을 입력해주세요.");
+                            String newComment = inputString(">>> ");
+                            if (newComment.equals("0")) {
+                                System.out.println("댓글 수정을 종료합니다.");
+                                return;
+                            }
+                            commentRepository.changeComment(targetCommentNum, newComment);
+                            System.out.println("댓글 수정 완료!");
+                            return;
+
+                        case 2:
+                            System.out.println("정말 삭제하시겠습니까?");
+                            System.out.println("1. 네  2. 아니요");
+                            int selection1 = inputInteger(">>> ");
+                            switch (selection1) {
+                                case 1:
+                                    commentRepository.deleteComment(targetCommentNum);
+                                    System.out.println("댓글 삭제 완료!");
+                                    return;
+                                case 2:
+                                    System.out.println("댓글 삭제가 취소되었습니다.");
+                                    return;
+                                default:
+                                    System.out.println("1번 또는 2번중에서 입력해주세요.");
+                            }
+
+                            break;
+                        default:
+                    }
+
+                } else {
+                    System.out.println("댓글 작성자 본인만 수정 / 삭제할 수 있습니다.");
+                }
+            } else {
+                System.out.println("선택하신 댓글은 존재하지 않습니다.");
             }
         }
-
     }
-
 
 }
