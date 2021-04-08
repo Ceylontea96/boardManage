@@ -16,7 +16,7 @@ import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 public class MyComment implements AppController { // 내 댓글
 
     UserRepository userRepository = new MemoryUserRepository();
-    CommentRepository commentRepository = new MemoryCommentRepository();
+
 
     List<Integer> commentNums = new ArrayList<>();
 
@@ -76,6 +76,7 @@ public class MyComment implements AppController { // 내 댓글
     }
 
     public void modify() {
+        CommentRepository commentRepository = new MemoryCommentRepository();
         UserRepository userRepository = new MemoryUserRepository();
         User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
         while (true) {
@@ -104,6 +105,7 @@ public class MyComment implements AppController { // 내 댓글
     }
 
     public void delete() {
+        CommentRepository commentRepository = new MemoryCommentRepository();
         User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
         while (true) {
 
