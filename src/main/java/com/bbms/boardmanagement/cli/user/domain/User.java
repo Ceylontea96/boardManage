@@ -82,6 +82,16 @@ public class User {
         this.postedCommentCount++;
     }
 
+    public List<Integer> findCommentNumber() {
+        List<Integer> commentList = new ArrayList<>();
+        for (int key : myComment.keySet()) {
+            Comment comment = myComment.get(key);
+
+            commentList.add(comment.getCommentNumber());
+        }
+        return commentList;
+    }
+
     //내 댓글 목록에서 삭제 기능
     public Comment delMyComment(int commentNumber) {
         this.postedCommentCount++;

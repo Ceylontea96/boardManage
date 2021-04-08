@@ -76,6 +76,8 @@ public class MyComment implements AppController { // 내 댓글
     }
 
     public void modify() {
+        UserRepository userRepository = new MemoryUserRepository();
+        User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
         while (true) {
             System.out.println("수정할 댓글 번호를 입력해주세요.");
             int commentNum = inputInteger(">>> ");
@@ -83,14 +85,16 @@ public class MyComment implements AppController { // 내 댓글
                 System.out.println("댓글 수정을 종료합니다.");
                 break;
             }
-            if (commentNums.contains(commentNum)) {
+            if (commentNum > 0 && commentNum <= userNow.getMyComment().size()) {
+                List<Integer> targetCommentNums = userNow.findCommentNumber();
+                int targetCommentNum = targetCommentNums.get(commentNum-1);
                 System.out.println("새로운 댓글 내용을 입력해주세요.");
                 String newComment = inputString(">>> ");
                 if(newComment.equals("0")){
                     System.out.println("댓글 수정을 종료합니다.");
                     break;
                 }
-                commentRepository.changeComment(commentNum, newComment);
+                commentRepository.changeComment(targetCommentNum, newComment);
                 System.out.println("댓글 수정 완료!");
                 return;
             } else {
@@ -100,6 +104,7 @@ public class MyComment implements AppController { // 내 댓글
     }
 
     public void delete() {
+        User userNow = MemoryUserRepository.getCurrentSession().getUserNow();
         while (true) {
 
             System.out.println("삭제할 댓글 번호를 입력해주세요.");
@@ -108,12 +113,14 @@ public class MyComment implements AppController { // 내 댓글
                 System.out.println("댓글 삭제를 종료합니다");
                 break;
             }
-            if (commentNums.contains(commentNum)) {
+            if (commentNum > 0 && commentNum <= userNow.getMyComment().size()) {
+                List<Integer> targetCommentNums = userNow.findCommentNumber();
+                int targetCommentNum = targetCommentNums.get(commentNum-1);
                 System.out.println("정말 삭제하시겠습니까?");
                 System.out.println("1. 네,  2. 아니요");
                 int selection = inputInteger(">>> ");
                 if (selection == 1) {
-                    commentRepository.deleteComment(commentNum);
+                    commentRepository.deleteComment(targetCommentNum);
                     System.out.println("댓글 삭제 완료!");
                 } else {
                     System.out.println("댓글 삭제를 취소했습니다.");
