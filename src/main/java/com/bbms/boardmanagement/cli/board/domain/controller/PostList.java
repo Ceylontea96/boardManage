@@ -8,6 +8,8 @@ import com.bbms.boardmanagement.cli.main.AppController;
 import com.bbms.boardmanagement.cli.user.domain.Rank;
 import com.bbms.boardmanagement.cli.user.domain.User;
 
+import java.util.List;
+
 import static com.bbms.boardmanagement.cli.board.ui.AppUI.*;
 import static com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository.*;
 
@@ -16,18 +18,25 @@ public class PostList implements AppController { // 글 목록 보여주기
     private static AppController appController;
     PostRepository postRepository = new MemoryPostRepository();
 
-
     @Override
     public void start() {
         while (true) {
-            postRepository.showList(postRepository.searchPostList("", SearchCondition.ALL));
+            List<Post> abc = postRepository.searchPostList("", SearchCondition.ALL);
+            postRepository.showList(abc);
             allDocumentIndexScreen();
             int selection = inputInteger(">>> ");
             switch (selection) {
                 case 1: // 자세히
                     System.out.println("게시글 번호를 입력해주세요.");
                     int postNum = inputInteger(">>> ");
-                    ReadMore.readMore(postNum);
+                    if (postRepository.integrity(abc).contains(postNum)) {
+                        ReadMore.readMore(postNum); //상세보기 페이지
+                    } else if (postNum == 0) {
+                        System.out.println("자세히 보기를 종료합니다.");
+                    } else {
+
+                        System.out.println("게시글 목록중에서 선택해주세요.");
+                    }
                     break;
                 case 2: //글 검색
                     appController = new PostSearch();
@@ -56,9 +65,9 @@ public class PostList implements AppController { // 글 목록 보여주기
         } else {
             String author = userNow.getNickName();
             String mainText = inputString("# 본문: ");
-            if (mainText.equals("0")){
+            if (mainText.equals("0")) {
                 System.out.println("게시글 추가를 종료합니다.");
-            }else {
+            } else {
                 String authorCode = userNow.getUserCode();
                 Rank userRank = userNow.getUserRank();
 
