@@ -53,8 +53,13 @@ public class ReadMore {
                     }
                     continue;
                 case 3: // 추천
-                    postNow.recommend++;
-                    System.out.println("추천되었습니다.");
+                   if(postNow.getRecommender().containsKey(userNow.getUserNumber())) {
+                       System.out.println("이미 추천 하셨습니다.");
+                } else {
+                       postNow.addRecommender(userNow);
+                       postNow.recommend++;
+                       System.out.println("추천 하셨습니다.");
+                   }
                     // 글 추천 로직
                     break;
                 case 4: // 댓글 쓰기

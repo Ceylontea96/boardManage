@@ -2,6 +2,10 @@ package com.bbms.boardmanagement.cli.board.domain;
 
 import com.bbms.boardmanagement.cli.comment.Comment;
 import com.bbms.boardmanagement.cli.user.domain.Rank;
+import com.bbms.boardmanagement.cli.user.domain.User;
+import com.bbms.boardmanagement.cli.Session;
+
+import javafx.geometry.Pos;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -27,11 +31,14 @@ public class Post {
     private static int postCount;                           //전체 게시글 수
     private int commentCount;                               //댓글 수
 
+    private Map<Integer, User> recommender = new HashMap<>(); //추천 유저정보
+
+
+
     private Map<Integer, Comment> thisComment = new HashMap<>();  //게시글 댓글 배열로 담기
 
 
     private String authorCode;                              //작성자 코드
-
 
 
     private static int sequence;                           //게시글 번호 정하는 상수
@@ -49,12 +56,17 @@ public class Post {
         this.mainText = mainText;
         this.authorCode = authorCode;
     }
+    //추천인 추가
+    public void addRecommender(User user) {
+        recommender.put(user.getUserNumber(), user);
+    }
 
     //내 댓글 목록에 추가 기능
     public void addComment(Comment comment) {
         thisComment.put(comment.getCommentNumber(), comment);
         commentCount++;
     }
+
     //내 댓글 목록에서 삭제 기능
     public Comment delComment(int commentNumber) {
         commentCount--;
@@ -70,12 +82,6 @@ public class Post {
         }
         return commentList;
     }
-
-
-
-
-
-
 
 
     //toString
@@ -179,6 +185,7 @@ public class Post {
     public static void setSequence(int sequence) {
         Post.sequence = sequence;
     }
+
     public int getCommentCount() {
         return commentCount;
     }
@@ -186,6 +193,7 @@ public class Post {
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
     }
+
     public String getAuthorCode() {
         return authorCode;
     }
@@ -201,4 +209,13 @@ public class Post {
     public void setThisComment(Map<Integer, Comment> thisComment) {
         this.thisComment = thisComment;
     }
+
+    public Map<Integer, User> getRecommender() {
+        return recommender;
+    }
+
+    public void setRecommender(Map<Integer, User> recommender) {
+        this.recommender = recommender;
+    }
+
 }
