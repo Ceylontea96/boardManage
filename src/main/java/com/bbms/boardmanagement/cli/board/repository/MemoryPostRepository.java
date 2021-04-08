@@ -27,7 +27,6 @@ public class MemoryPostRepository implements PostRepository {
     private static Session currentSession = new Session();
 
 
-
     static {
         insertTestData();
     }
@@ -106,13 +105,13 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     @Override // 제목 수정
-    public void changeTitle(int postNumber,String title) {
+    public void changeTitle(int postNumber, String title) {
         Post post = searchSpecificPost(postNumber);
         post.setTitle(title);
     }
 
     @Override // 본문 수정
-    public void changeText(int postNumber,String mainText) {
+    public void changeText(int postNumber, String mainText) {
         Post post = searchSpecificPost(postNumber);
         post.setMainText(mainText);
     }
@@ -120,8 +119,8 @@ public class MemoryPostRepository implements PostRepository {
     @Override // 게시글 번호로 게시글 검색
     public Post searchSpecificPost(int postNumber) {
         Post post = null;
-        for (int key: postMemoryDB.keySet()) {
-            if(postNumber == key) {
+        for (int key : postMemoryDB.keySet()) {
+            if (postNumber == key) {
                 post = postMemoryDB.get(key);
             }
         }
@@ -144,7 +143,7 @@ public class MemoryPostRepository implements PostRepository {
     @Override
     public void removePost(int postNumber) {
         for (int key : postMemoryDB.keySet()) {
-            if(postNumber == key) {
+            if (postNumber == key) {
                 postMemoryDB.remove(key);
                 break;
             }
@@ -157,7 +156,7 @@ public class MemoryPostRepository implements PostRepository {
         System.out.println("================================================================================");
         System.out.println("제목: " + post.getTitle());// + "[" +post.getThisComment().size()+ "]"
         System.out.println("작성자: " + post.getAuthor());
-        System.out.println("회원등급: " +post.getUserRank() + "         조회: " + post.getView());
+        System.out.println("회원등급: " + post.getUserRank() + "         조회: " + post.getView());
         System.out.println("작성시간: " + post.getReportingDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         System.out.println(post.getMainText());
         System.out.println("추천: " + post.getRecommend());
@@ -174,7 +173,7 @@ public class MemoryPostRepository implements PostRepository {
     }
 
     //게시글 검증
-    public List<Integer> integrity (List<Post> postList) {
+    public List<Integer> integrity(List<Post> postList) {
         List<Integer> postNums = new ArrayList<>();
 
         for (Post post : postList) {
@@ -182,6 +181,8 @@ public class MemoryPostRepository implements PostRepository {
         }
         return postNums;
     }
+
+
 
 
     //게시글 검색 조건을 위한 인터페이스
