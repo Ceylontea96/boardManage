@@ -34,6 +34,7 @@ public class MemoryCommentRepository implements CommentRepository {
         Comment comment2 = new Comment("아무내용", user1);
         Comment comment3 = new Comment("아무런 내용도 없음", user2);
 
+
         commentMemoryDB.put(comment1.getCommentNumber(), comment1);
         commentMemoryDB.put(comment2.getCommentNumber(), comment2);
         commentMemoryDB.put(comment3.getCommentNumber(), comment3);

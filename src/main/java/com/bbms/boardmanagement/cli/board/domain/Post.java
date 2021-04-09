@@ -97,7 +97,7 @@ public class Post {
                         title, author,
                         reportingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
                         mainText, recommend);*/
-        return String.format("%d    %s              %s      %s      %d      %d\n", postNumber, title, author, reportingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), view, recommend);
+        return String.format(" %d           %s        %s      %s      %d      %d\n", postNumber, title, author, reportingDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), view, recommend);
     }
 
     //getter 및 setter

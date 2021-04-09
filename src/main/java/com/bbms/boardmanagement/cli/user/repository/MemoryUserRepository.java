@@ -24,7 +24,7 @@ public class MemoryUserRepository implements UserRepository {
 
     private static void insertTestData() {
         User user1 = new User("isec", "isec123", "아이섹",
-                1996, 04, 07, "남자", "안녕하세요 정보보호교육학원 아이섹입니다.");
+                1996, 04, 9, "남자", "안녕하세요 정보보호교육학원 아이섹입니다.");
 
         userMemoryDB.put(user1.getUserCode(), user1);
 

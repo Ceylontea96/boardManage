@@ -5,6 +5,8 @@ import com.bbms.boardmanagement.cli.board.domain.Post;
 import com.bbms.boardmanagement.cli.board.domain.SearchCondition;
 import com.bbms.boardmanagement.cli.board.domain.SystemMessage;
 import com.bbms.boardmanagement.cli.comment.Comment;
+import com.bbms.boardmanagement.cli.comment.repository.CommentRepository;
+import com.bbms.boardmanagement.cli.comment.repository.MemoryCommentRepository;
 import com.bbms.boardmanagement.cli.user.domain.Rank;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
@@ -33,10 +35,11 @@ public class MemoryPostRepository implements PostRepository {
 
     private static void insertTestData() {
 
-        Post post1 = new Post("제목1", "글쓴이1", "아무내용없음1", "", Rank.BRANCH);
-        Post post2 = new Post("제목2", "글쓴이2", "아무내용없음2", "", Rank.BRANCH);
-        Post post3 = new Post("제목3", "글쓴이3", "아무내용없음3", "", Rank.BRANCH);
-        Post post4 = new Post("제목4", "글쓴이4", "제목이랑아무내용없음4", "", Rank.BRANCH);
+        Post post1 = new Post("코인 하는법", "카페 매니저", "코인이란 무엇인가? 어쩌구 저쩌꾸", "", Rank.EARTH);
+        Post post2 = new Post("코인추천종목", "DTS12319441", "아하코인 풀매수하세요", "", Rank.BRANCH);
+        Post post3 = new Post("돈 잘버는법", "일론 머스크", "테슬라 주식 사고 화성으로 갑시다 여러분", "", Rank.FOREST);
+        Post post4 = new Post("한강물 온도", "비트코인75층", "비트코인 75층에서 물렸습니다. 혹시 근처에 주민분들 계신가요?", "", Rank.BRANCH);
+
 
         postMemoryDB.put(post1.getPostNumber(), post1);
         postMemoryDB.put(post2.getPostNumber(), post2);
@@ -133,7 +136,7 @@ public class MemoryPostRepository implements PostRepository {
             System.out.println("---------------------------------- 게시글 없음 --------------------------------------");
         }
         System.out.println("========================================== 글 목록 =======================================\n");
-        System.out.println("번호            제목            작성자             작성일          조회    추천");
+        System.out.println("번호            제목            작성자             작성일                조회    추천");
         for (Post post : searchList) {
             System.out.println(post);
         }
