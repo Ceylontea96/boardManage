@@ -6,6 +6,7 @@ import com.bbms.boardmanagement.cli.board.repository.MemoryPostRepository;
 import com.bbms.boardmanagement.cli.board.repository.PostRepository;
 import com.bbms.boardmanagement.cli.main.AppController;
 import com.bbms.boardmanagement.cli.user.domain.Rank;
+import com.bbms.boardmanagement.cli.user.domain.RankPolicy;
 import com.bbms.boardmanagement.cli.user.domain.User;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class PostList implements AppController { // 글 목록 보여주기
                 case 3: // 새 글쓰기
                     User userNow = getCurrentSession().getUserNow();
                     insertPost(userNow);
+                    RankPolicy.changeRank(userNow);
                     continue;
 //                    break;
                 case 4: //돌아가기

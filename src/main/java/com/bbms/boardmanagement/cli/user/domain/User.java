@@ -94,7 +94,7 @@ public class User {
 
     //내 댓글 목록에서 삭제 기능
     public Comment delMyComment(int commentNumber) {
-        this.postedCommentCount++;
+        this.postedCommentCount--;
         return myComment.remove(commentNumber);
     }
 

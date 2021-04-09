@@ -23,7 +23,8 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     private static void insertTestData() {
-        User user1 = new User("isec", "isec123", "아이섹", 1996, 04, 07, "남자", "안녕하세요 정보보호교육학원 아이섹입니다.");
+        User user1 = new User("isec", "isec123", "아이섹",
+                1996, 04, 07, "남자", "안녕하세요 정보보호교육학원 아이섹입니다.");
 
         userMemoryDB.put(user1.getUserCode(), user1);
 
@@ -134,6 +135,7 @@ public class MemoryUserRepository implements UserRepository {
         System.out.println("생일: " + user.getBirth());
         System.out.println("성별: " + user.getGender());
         System.out.println("자기소개: " + user.getIntroduce());
+        System.out.println("내 등급: "+ user.getUserRank());
         System.out.println("내가 작성한 게시글 수: " + user.getPostedPostCount());
         System.out.println("내가 작성한 댓글 수: " + user.getPostedCommentCount());
         System.out.println("=================================");
