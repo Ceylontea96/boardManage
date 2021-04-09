@@ -9,6 +9,7 @@ import com.bbms.boardmanagement.cli.comment.Comment;
 import com.bbms.boardmanagement.cli.comment.repository.CommentRepository;
 import com.bbms.boardmanagement.cli.comment.repository.MemoryCommentRepository;
 import com.bbms.boardmanagement.cli.main.AppController;
+import com.bbms.boardmanagement.cli.user.domain.RankPolicy;
 import com.bbms.boardmanagement.cli.user.domain.User;
 import com.bbms.boardmanagement.cli.user.repository.MemoryUserRepository;
 
@@ -66,6 +67,7 @@ public class ReadMore {
                     break;
                 case 4: // 댓글 쓰기
                     comment(postNow, userNow);
+                    RankPolicy.changeRank(userNow);
                     break;
                 case 5: // 댓글 수정 / 삭제
                     commentModifyOrDelete();
